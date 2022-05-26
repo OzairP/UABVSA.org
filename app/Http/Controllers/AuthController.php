@@ -41,6 +41,7 @@ class AuthController extends Controller
             'discord_id' => $discord_user->getId(),
             'avatar' => $discord_user->getAvatar(),
             'roles' => $membership['roles'],
+            'joined_at' => $membership['joined_at'],
             'access_token' => $discord_user->token,
             'refresh_token' => $discord_user->refreshToken,
         ]);

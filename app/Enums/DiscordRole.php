@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Enums;
+
+enum DiscordRole: string
+{
+    case PRESIDENT = '633743719635615744';
+    case VICE_PRESIDENT = '633743904214220811';
+    case EBOARD = '633131156719796228';
+    case HELPER = '633754951771750420';
+    case ALUMNI = '801684857653952544';
+    case MEMBER = '633131484177367049';
+}
