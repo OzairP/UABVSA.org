@@ -15,12 +15,16 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('nickname');
+            $table->string('email');
+            $table->string('discord_id')->unique();
+            $table->string('avatar');
+            $table->json('roles');
+            $table->string('access_token');
+            $table->string('refresh_token');
             $table->timestamps();
+
+            $table->index('discord_id');
         });
     }
 
