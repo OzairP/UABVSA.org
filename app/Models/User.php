@@ -70,7 +70,7 @@ class User extends Authenticatable
 
     public function isAdmin (): bool
     {
-        $adminRoles = [DiscordRole::PRESIDENT, DiscordRole::VICE_PRESIDENT, DiscordRole::EBOARD];
+        $adminRoles = [DiscordRole::PRESIDENT->value, DiscordRole::VICE_PRESIDENT->value, DiscordRole::EBOARD->value];
 
         return $this->isSuperUser() || $this->hasRole($adminRoles);
     }

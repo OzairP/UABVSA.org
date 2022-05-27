@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nickname');
             $table->string('email');
-            $table->string('joined_at');
+            $table->string('joined_at')->nullable();
             $table->string('discord_id')->unique();
             $table->string('avatar');
             $table->json('roles');

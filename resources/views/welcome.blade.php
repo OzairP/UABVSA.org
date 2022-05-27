@@ -168,7 +168,7 @@
         <a href="{{ route('auth.redirect') }}" class="login-text">login</a>
     @endguest
     <div class="background-video">
-        <video autoplay muted loop src="/media/background_video.mp4"></video>
+{{--        <video autoplay muted loop src="/media/background_video.mp4"></video>--}}
     </div>
     <div class="landing-text">
         <h1 class="text-chonky">The</h1>
@@ -177,7 +177,7 @@
         <h4><a href="https://www.uab.edu/" target="_blank" class="hidden">at The University of Alabama at Birmingham</a>
         </h4>
         <div class="socials">
-            {{ '' /* https://simpleicons.org/ */ }}
+            {{-- https://simpleicons.org/ --}}
             <a href="https://www.instagram.com/uabvsa/" class="socials__link socials__link--instagram">
                 <svg height="50px" width="50px" viewBox="0 0 24 24">
                     <path
