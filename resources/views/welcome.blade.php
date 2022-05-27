@@ -168,7 +168,7 @@
         <a href="{{ route('auth.redirect') }}" class="login-text">login</a>
     @endguest
     <div class="background-video">
-{{--        <video autoplay muted loop src="/media/background_video.mp4"></video>--}}
+        <video autoplay muted loop src="/media/background_video.mp4"></video>
     </div>
     <div class="landing-text">
         <h1 class="text-chonky">The</h1>
