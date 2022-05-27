@@ -48,6 +48,7 @@ class Redirection extends Resource
             ID::make()->sortable(),
 
             Text::make('Slug')
+                ->displayUsing(fn () => "/{$this->slug}")
                 ->required()
                 ->rules('required', 'max:255', 'min:1')
                 ->creationRules('unique:redirections')

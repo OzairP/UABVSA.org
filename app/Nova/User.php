@@ -79,13 +79,16 @@ class User extends Resource
                 ->filterable()
                 ->readonly(),
 
-            DateTime::make('Joined At')
+            DateTime::make('Joined Discord At', 'joined_at')
                 ->required()
                 ->sortable()
                 ->filterable()
                 ->readonly(),
 
-            DateTime::make('Last Logged In', 'updated_at'),
+            DateTime::make('Last Logged In', 'updated_at')
+                ->readonly()
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
 
             Code::make('Roles', fn () => $this->resolveRoles())
                 ->json()
