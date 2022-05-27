@@ -1,9 +1,7 @@
 <?php
 
-use App\Enums\DiscordRole;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RedirectionController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,9 +19,5 @@ Route::get('/', static fn() => view('welcome'))->name('home');
 
 Route::get('/auth/redirect', [AuthController::class, 'discord_redirect'])->name('auth.redirect');
 Route::get('/auth/callback', [AuthController::class, 'discord_callback'])->name('auth.callback');
-
-Route::get('/test', function () {
-    dd(Auth::user()->isAdmin());
-});
 
 Route::get('/{redirection:slug}', [RedirectionController::class, 'redirect']);

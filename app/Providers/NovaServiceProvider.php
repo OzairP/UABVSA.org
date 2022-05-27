@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\User;
 use App\Nova\Dashboards\Main;
+use App\Nova\Dashboards\Sys;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
@@ -11,6 +12,7 @@ use Laravel\Nova\Menu\Menu;
 use Laravel\Nova\Menu\MenuItem;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
+use Stepanenko3\NovaHealth\NovaHealth;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -75,6 +77,7 @@ BLADE
     {
         return [
             new Main,
+            new Sys
         ];
     }
 
@@ -84,6 +87,8 @@ BLADE
      */
     public function tools ()
     {
-        return [];
+        return [
+            new NovaHealth,
+        ];
     }
 }

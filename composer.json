@@ -7,13 +7,19 @@
     "require": {
         "php": "^8.0.2",
         "guzzlehttp/guzzle": "^7.2",
+        "kussie/nova-version-card": "^0.1.0",
         "laravel/framework": "^9.11",
         "laravel/nova": "~4.7.0",
         "laravel/sanctum": "^2.14.1",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
+        "norman-huth/nova-secret-field": "^1.0",
         "predis/predis": "^1.1",
-        "socialiteproviders/discord": "^4.1"
+        "socialiteproviders/discord": "^4.1",
+        "spatie/cpu-load-health-check": "^1.0",
+        "spatie/laravel-health": "^1.9",
+        "stepanenko3/nova-cards": "^1.6",
+        "stepanenko3/nova-health": "^1.1"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
