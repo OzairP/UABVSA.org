@@ -48,9 +48,19 @@ class Redirection extends Resource
             ID::make()->sortable(),
 
             Text::make('Slug')
+                ->required()
+                ->rules('required', 'max:255', 'min:1')
+                ->creationRules('unique:redirections')
+                ->showOnDetail(false)
                 ->filterable(),
 
+            URL::make('Slug', fn () => url("/{$this->slug}"))
+                ->displayUsing(fn () => url("/{$this->slug}"))
+                ->onlyOnDetail(),
+
             URL::make('Redirects To')
+                ->required()
+                ->rules('required', 'max:255', 'min:1', 'active_url')
                 ->displayUsing(fn () => $this->redirects_to)
                 ->filterable(),
 
@@ -60,7 +70,7 @@ class Redirection extends Resource
                 ->readonly()
                 ->exceptOnForms(),
 
-            DateTime::make('Updated At')
+            DateTime::make('Last Clicked At', 'updated_at')
                 ->filterable()
                 ->sortable()
                 ->readonly()

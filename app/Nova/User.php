@@ -62,28 +62,32 @@ class User extends Resource
                 ->readonly(),
 
             Text::make('Nickname')
+                ->required()
                 ->sortable()
                 ->filterable()
                 ->readonly(),
 
             Text::make('Email')
+                ->required()
                 ->sortable()
                 ->filterable()
                 ->readonly(),
 
             Text::make('Discord ID')
+                ->required()
                 ->sortable()
                 ->filterable()
                 ->readonly(),
 
             DateTime::make('Joined At')
+                ->required()
                 ->sortable()
                 ->filterable()
                 ->readonly(),
 
             DateTime::make('Last Logged In', 'updated_at'),
 
-            Code::make('Roles')
+            Code::make('Roles', fn () => $this->resolveRoles())
                 ->json()
                 ->onlyOnDetail()
                 ->readonly(),

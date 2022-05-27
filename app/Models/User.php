@@ -63,9 +63,32 @@ class User extends Authenticatable
         return $this->roles->intersect($role)->isNotEmpty();
     }
 
+    public function isSuperUser (): bool
+    {
+        return $this->discord_id === config('discord.admin_id');
+    }
+
     public function isAdmin (): bool
     {
-        return $this->discord_id === config('discord.admin_id') ||
-            $this->hasRole([DiscordRole::PRESIDENT, DiscordRole::VICE_PRESIDENT, DiscordRole::EBOARD]);
+        $adminRoles = [DiscordRole::PRESIDENT, DiscordRole::VICE_PRESIDENT, DiscordRole::EBOARD];
+
+        return $this->isSuperUser() || $this->hasRole($adminRoles);
     }
+
+    /**
+     * @return string
+     */
+    public function resolveRoles (): string
+    {
+        return $this->roles
+            ->map(function ($role) {
+                try {
+                    return DiscordRole::tryFrom($role)->name;
+                } catch (\Exception $e) {
+                    return $role;
+                }
+            })
+            ->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+
 }

@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
-use App\Enums\DiscordRole;
 use App\Models\User;
 use App\Nova\Dashboards\Main;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
+use Laravel\Nova\Menu\Menu;
+use Laravel\Nova\Menu\MenuItem;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 
@@ -19,6 +22,18 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot ()
     {
         parent::boot();
+
+        Nova::userMenu(function (Request $request, Menu $menu) {
+            $menu->prepend(MenuItem::externalLink('Home', '/'));
+
+            return $menu;
+        });
+
+        Nova::footer(fn($request) => Blade::render(<<<'BLADE'
+            <p class="text-center">uabvsa.org · created by <a class="link-default" href="mailto:ozairpatel2@gmail.com">Ozair Patel</a>.</p>
+            <p class="text-center">Powered by <a class="link-default" href="https://nova.laravel.com">Laravel Nova</a> · v4.7.0 (Silver Surfer)</p>
+BLADE
+        ));
     }
 
     /**
