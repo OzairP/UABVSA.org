@@ -14,7 +14,7 @@ git pull
 composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
 # Change ownership of vendor so www-data can access them
-chmod -R www-data vendor
+chmown -R www-data vendor
 
 # Clear the old cache
 php artisan clear-compiled
