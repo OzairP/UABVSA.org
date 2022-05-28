@@ -190,7 +190,7 @@
     </div>
     <div class="landing-text">
         <h1 class="text-chonky">The</h1>
-        <h1>Vietnamese</h1>
+        <h1>Vietnamese Test</h1>
         <h1>Student Association</h1>
         <h4><a href="https://www.uab.edu/" target="_blank" class="decoration-hidden">at The University of Alabama at Birmingham</a>
         </h4>
