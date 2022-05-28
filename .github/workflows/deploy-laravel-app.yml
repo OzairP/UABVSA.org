@@ -5,16 +5,14 @@ name: Deploy
 on:
   push:
     branches:
-      - production
-  pull_request:
-    branches:
-      - production
+      - main
 
 # Authenticate to the the server via ssh
 # and run our deployment script
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/checkout@v2
       - name: Deploy to server
