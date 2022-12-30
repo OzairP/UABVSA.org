@@ -31,6 +31,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         parent::boot();
 
+        Nova::initialPath('/dashboards/home');
+
         Nova::userMenu(function (Request $request, Menu $menu) {
             $menu->prepend(MenuItem::externalLink('Home', '/'));
 
