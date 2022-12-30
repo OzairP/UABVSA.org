@@ -89,7 +89,9 @@ class LotusReservationsController extends Controller
         Mail::send(new SendReservationTicket($reservation));
         Log::info('Reservation ticket sent to ' . $reservation->email);
 
-        return view('lotus.reserving.success');
+        return view('lotus.reserving.success', [
+            'reservation' => $reservation,
+        ]);
     }
 
     public function paymentSuccess (Request $request)
@@ -118,7 +120,9 @@ class LotusReservationsController extends Controller
         Mail::send(new SendReservationTicket($reservation));
         Log::info('Reservation ticket sent to ' . $reservation->email);
 
-        return view('lotus.reserving.success');
+        return view('lotus.reserving.success', [
+            'reservation' => $reservation,
+        ]);
     }
 
     public function paymentCancel (Request $request)
