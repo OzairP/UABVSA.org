@@ -41,8 +41,4 @@ Route::get('/lotus2023/payment/success', [LotusReservationsController::class, 'p
 Route::get('/lotus2023/payment/cancel', [LotusReservationsController::class, 'paymentCancel'])
      ->name('lotus.payment.cancel');
 
-Route::view('/test', 'lotus.reserving.expired', [
-    'reservation' => \App\Models\LotusReservation::findOrFail(1),
-]);
-
 Route::get('/{redirection:slug}', [RedirectionController::class, 'redirect']);
