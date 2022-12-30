@@ -19,8 +19,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command(RunHealthChecksCommand::class)->everyMinute();
-        $schedule->command(PruneOldHealthChecks::class)->everySixHours();
-        $schedule->command(PruneExpiredPendingReservations::class)->everyFiveMinutes();
+        $schedule->job(PruneOldHealthChecks::class)->everySixHours();
+        $schedule->job(PruneExpiredPendingReservations::class)->everyFiveMinutes();
     }
 
     /**
