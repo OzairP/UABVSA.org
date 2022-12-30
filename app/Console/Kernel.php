@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Jobs\Lotus\PruneExpiredPendingReservations;
+use App\Jobs\Nova\PruneOldHealthChecks;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Spatie\Health\Commands\RunHealthChecksCommand;
@@ -17,6 +19,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command(RunHealthChecksCommand::class)->everyMinute();
+        $schedule->command(PruneOldHealthChecks::class)->everySixHours();
+        $schedule->command(PruneExpiredPendingReservations::class)->everyFiveMinutes();
     }
 
     /**

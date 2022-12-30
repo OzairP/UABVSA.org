@@ -3,15 +3,21 @@
 namespace App\Providers;
 
 use App\Models\User;
-use App\Nova\Dashboards\Main;
+use App\Nova\Dashboards\LotusDashboard;
+use App\Nova\Dashboards\Home;
 use App\Nova\Dashboards\Sys;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Menu\Menu;
 use Laravel\Nova\Menu\MenuItem;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
+use Outl1ne\NovaSettings\NovaSettings;
 use Stepanenko3\NovaHealth\NovaHealth;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
@@ -36,6 +42,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             <p class="text-center">Powered by <a class="link-default" href="https://nova.laravel.com">Laravel Nova</a> · v4.7.0 (Silver Surfer)</p>
 BLADE
         ));
+
+        NovaSettings::addSettingsFields([
+            Boolean::make('Allow New Reservations', 'lotus_allow_new_reservations'),
+            Number::make('Ticket Capacity', 'lotus_ticket_capacity'),
+            Text::make('Stripe Product Id', 'lotus_stripe_product_id'),
+        ], [], 'Lotus Ticket Settings');
     }
 
     /**
@@ -66,7 +78,11 @@ BLADE
      */
     protected function gate (): void
     {
-        Gate::define('viewNova', fn(User $user) => $user->isAdmin());
+        if ($this->app->environment('local')) {
+            Auth::loginUsingId(1);
+        }
+
+        Gate::define('viewNova', static fn(User $user) => $user->isAdmin());
     }
 
     /**
@@ -76,7 +92,8 @@ BLADE
     protected function dashboards ()
     {
         return [
-            new Main,
+            new Home,
+            new LotusDashboard,
             new Sys
         ];
     }
@@ -89,6 +106,7 @@ BLADE
     {
         return [
             new NovaHealth,
+            new NovaSettings
         ];
     }
 }
