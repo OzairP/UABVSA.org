@@ -9,6 +9,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /**
  * App\Models\LotusReservation
+ *
  * @property int                             $id
  * @property string                          $holder_type
  * @property string                          $name
@@ -37,6 +38,10 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
  * @method static \Illuminate\Database\Eloquent\Builder|LotusReservation whereTickets($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LotusReservation whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $donation
+ * @property string|null $donation_stripe_payment_id
+ * @method static \Illuminate\Database\Eloquent\Builder|LotusReservation whereDonation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LotusReservation whereDonationStripePaymentId($value)
  */
 class LotusReservation extends Model
 {

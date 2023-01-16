@@ -16,14 +16,15 @@ class LotusReserveTicketRequest extends FormRequest
     public function rules ()
     {
         return [
-            'holder_type'    => 'required|in:student,general,sponsor',
+            'holder_type'    => 'required|in:student,general',
             'name'           => 'required|string',
-            'email'          => 'required|email|unique:lotus_reservations,email',
+            'email'          => 'required|email',
             'tickets'        => 'required|integer|min:1|max:3',
             'dietary'        => 'nullable|string',
             'accommodations' => 'nullable|string',
         ];
     }
+
 
     /**
      * Configure the validator instance.
@@ -33,19 +34,19 @@ class LotusReserveTicketRequest extends FormRequest
      */
     public function withValidator (Validator $validator)
     {
-        $validator->after(function (Validator $validator) {
-            if ($this->get('holder_type') === 'student' && $this->get('tickets') > 1) {
-                $validator->errors()
-                          ->add('tickets', 'Students may only reserve 1 ticket.');
-            }
-        });
+//        $validator->after(function (Validator $validator) {
+//            if ($this->get('holder_type') === 'student' && $this->get('tickets') > 1) {
+//                $validator->errors()
+//                          ->add('tickets', 'Students may only reserve 1 ticket.');
+//            }
+//        });
 
-        $validator->after(function (Validator $validator) {
-            if ($this->get('holder_type') === 'student' && !str_ends_with($this->get('email'), '@uab.edu')) {
-                $validator->errors()
-                          ->add('email', 'Must be a @uab.edu email.');
-            }
-        });
+//        $validator->after(function (Validator $validator) {
+//            if ($this->get('holder_type') === 'student' && !str_ends_with($this->get('email'), '@uab.edu')) {
+//                $validator->errors()
+//                          ->add('email', 'Must be a @uab.edu email.');
+//            }
+//        });
 
         $validator->after(function (Validator $validator) {
             if (!LotusReservation::acceptingNewReservations()) {
@@ -73,7 +74,6 @@ class LotusReserveTicketRequest extends FormRequest
     {
         return [
             'holder_type.required' => 'You must select your status.',
-            'email.unique' => 'You have already reserved a ticket.',
             'tickets.max' => 'You cannot reserve more than 3 tickets.',
         ];
     }

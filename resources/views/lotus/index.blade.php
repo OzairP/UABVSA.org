@@ -14,8 +14,8 @@
 
         <div class="h-full w-full flex flex-col px-5 z-10 absolute top-0 container-xl mx-auto pt-40">
             <div>
-                <h3 class="text-white text-center text-2xl mb-5">The Vietnamese Student Association Presents</h3>
-                <h1 class="font-['Cinzel_Decorative'] text-white text-center text-5xl lg:text-8xl font-light" x-target="letter-effect">Lotus Under the Lights</h1>
+                <h3 class="text-white text-center text-2xl mb-5">The Vietnamese Student Association at UAB™ presents</h3>
+                <h1 class="font-['Cinzel_Decorative'] text-white text-center text-5xl lg:text-8xl font-light" x-target="letter-effect">Lotus Under the Lights 3</h1>
                 <p class="text-white text-center md:text-xl w-max-[750px] mx-auto mt-5 md:mt-0">Short description of LUTL. To some, a moon is a courage for understanding. The popular lotus is easing, the new source is wrestling. A synthetic form of anger is the beauty.</p>
             </div>
             <h3 class="text-white text-center text-2xl mt-5 font-sans" x-target="countdown">
@@ -146,19 +146,8 @@
                         <p class="text-xl font-bold">I'm a...</p>
                         <div class="radio-toolbar flex flex-col md:flex-row w-full">
                             <div class="flex-grow">
-                                <input type="radio" name="holder_type" id="holder_type__general" value="general" class="opacity-0 fixed w-0 peer" checked>
-                                <label for="holder_type__general" class="text-red-800 bg-red-100 inline-block px-4 py-4 hover:bg-red-200 peer-checked:bg-red-700 peer-checked:text-white w-full hover:cursor-pointer transition-all rounded-t md:rounded-tr-none md:rounded-l-lg">
-                                    <div class="flex flex-row align-center justify-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-2">
-                                            <path fill-rule="evenodd" d="M1.5 6.375c0-1.036.84-1.875 1.875-1.875h17.25c1.035 0 1.875.84 1.875 1.875v3.026a.75.75 0 01-.375.65 2.249 2.249 0 000 3.898.75.75 0 01.375.65v3.026c0 1.035-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 17.625v-3.026a.75.75 0 01.374-.65 2.249 2.249 0 000-3.898.75.75 0 01-.374-.65V6.375zm15-1.125a.75.75 0 01.75.75v.75a.75.75 0 01-1.5 0V6a.75.75 0 01.75-.75zm.75 4.5a.75.75 0 00-1.5 0v.75a.75.75 0 001.5 0v-.75zm-.75 3a.75.75 0 01.75.75v.75a.75.75 0 01-1.5 0v-.75a.75.75 0 01.75-.75zm.75 4.5a.75.75 0 00-1.5 0V18a.75.75 0 001.5 0v-.75zM6 12a.75.75 0 01.75-.75H12a.75.75 0 010 1.5H6.75A.75.75 0 016 12zm.75 2.25a.75.75 0 000 1.5h3a.75.75 0 000-1.5h-3z" clip-rule="evenodd" />
-                                        </svg>
-                                        <span>General Attendee</span>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="flex-grow">
-                                <input type="radio" name="holder_type" id="holder_type__student" value="student" class="opacity-0 fixed w-0 peer">
-                                <label for="holder_type__student" class="text-red-800 bg-red-100 inline-block px-4 py-4 hover:bg-red-200 peer-checked:bg-red-700 peer-checked:text-white w-full hover:cursor-pointer transition-all">
+                                <input type="radio" name="holder_type" id="holder_type__student" value="student" class="opacity-0 fixed w-0 peer" {{ !old('holder_type') ? 'checked' : (old('holder_type') === 'student' ? 'checked' : '')}}>
+                                <label for="holder_type__student" class="text-red-800 bg-red-100 inline-block px-4 py-4 hover:bg-red-200 peer-checked:bg-red-700 peer-checked:text-white w-full hover:cursor-pointer transition-all rounded-t md:rounded-tr-none md:rounded-l-lg">
                                     <div class="flex flex-row align-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-2">
                                             <path d="M11.7 2.805a.75.75 0 01.6 0A60.65 60.65 0 0122.83 8.72a.75.75 0 01-.231 1.337 49.949 49.949 0 00-9.902 3.912l-.003.002-.34.18a.75.75 0 01-.707 0A50.009 50.009 0 007.5 12.174v-.224c0-.131.067-.248.172-.311a54.614 54.614 0 014.653-2.52.75.75 0 00-.65-1.352 56.129 56.129 0 00-4.78 2.589 1.858 1.858 0 00-.859 1.228 49.803 49.803 0 00-4.634-1.527.75.75 0 01-.231-1.337A60.653 60.653 0 0111.7 2.805z" />
@@ -170,13 +159,13 @@
                                 </label>
                             </div>
                             <div class="flex-grow">
-                                <input type="radio" name="holder_type" id="holder_type__sponsor" value="sponsor" class="opacity-0 fixed w-0 peer">
-                                <label for="holder_type__sponsor" class="text-red-800 bg-red-100 inline-block px-4 py-4 hover:bg-red-200 peer-checked:bg-red-700 peer-checked:text-white w-full hover:cursor-pointer transition-all rounded-b md:rounded-bl-none md:rounded-r-lg">
+                                <input type="radio" name="holder_type" id="holder_type__general" value="general" class="opacity-0 fixed w-0 peer" {{ old('holder_type') === 'general' ? 'checked' : '' }}>
+                                <label for="holder_type__general" class="text-red-800 bg-red-100 inline-block px-4 py-4 hover:bg-red-200 peer-checked:bg-red-700 peer-checked:text-white w-full hover:cursor-pointer transition-all rounded-b md:rounded-bl-none md:rounded-r-lg">
                                     <div class="flex flex-row align-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-2">
-                                            <path d="M9.375 3a1.875 1.875 0 000 3.75h1.875v4.5H3.375A1.875 1.875 0 011.5 9.375v-.75c0-1.036.84-1.875 1.875-1.875h3.193A3.375 3.375 0 0112 2.753a3.375 3.375 0 015.432 3.997h3.943c1.035 0 1.875.84 1.875 1.875v.75c0 1.036-.84 1.875-1.875 1.875H12.75v-4.5h1.875a1.875 1.875 0 10-1.875-1.875V6.75h-1.5V4.875C11.25 3.839 10.41 3 9.375 3zM11.25 12.75H3v6.75a2.25 2.25 0 002.25 2.25h6v-9zM12.75 12.75v9h6.75a2.25 2.25 0 002.25-2.25v-6.75h-9z" />
+                                            <path fill-rule="evenodd" d="M1.5 6.375c0-1.036.84-1.875 1.875-1.875h17.25c1.035 0 1.875.84 1.875 1.875v3.026a.75.75 0 01-.375.65 2.249 2.249 0 000 3.898.75.75 0 01.375.65v3.026c0 1.035-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 17.625v-3.026a.75.75 0 01.374-.65 2.249 2.249 0 000-3.898.75.75 0 01-.374-.65V6.375zm15-1.125a.75.75 0 01.75.75v.75a.75.75 0 01-1.5 0V6a.75.75 0 01.75-.75zm.75 4.5a.75.75 0 00-1.5 0v.75a.75.75 0 001.5 0v-.75zm-.75 3a.75.75 0 01.75.75v.75a.75.75 0 01-1.5 0v-.75a.75.75 0 01.75-.75zm.75 4.5a.75.75 0 00-1.5 0V18a.75.75 0 001.5 0v-.75zM6 12a.75.75 0 01.75-.75H12a.75.75 0 010 1.5H6.75A.75.75 0 016 12zm.75 2.25a.75.75 0 000 1.5h3a.75.75 0 000-1.5h-3z" clip-rule="evenodd" />
                                         </svg>
-                                        <span>Sponsor</span>
+                                        <span>General Attendee</span>
                                     </div>
                                 </label>
                             </div>
@@ -186,46 +175,50 @@
                         @enderror
                     </div>
                     <div class="flex flex-col space-y-2">
-                        <label for="name" class="text-xl font-bold">Name:</label>
+                        <label for="name" class="text-xl font-bold">Full Name</label>
                         <input type="text" name="name" id="name" value="{{ old('name') }}" class="rounded-lg border-2 border-gray-300 px-4 py-2 text-black @error('name') border-red-400 bg-red-200 @enderror">
                         @error('name')
                         <small class="text-red-700">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="flex flex-col space-y-2">
-                        <label for="email" class="text-xl font-bold">Email Address:</label>
-                        <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="you@domain.com" class="rounded-lg border-2 border-gray-300 px-4 py-2 text-black @error('email') border-red-400 bg-red-200 @enderror">
+                        <label for="email" class="text-xl font-bold">Blazer E-Mail</label>
+                        <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="student@uab.edu" class="rounded-lg border-2 border-gray-300 px-4 py-2 text-black @error('email') border-red-400 bg-red-200 @enderror">
                         @error('email')
                         <small class="text-red-700">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class="flex flex-col space-y-2 xl:space-y-0 xl:flex-row xl:space-x-6">
-                        <div class="flex flex-col space-y-2 flex-grow">
-                            <label for="tickets" class="text-xl font-bold">How many tickets would you like to purchase?</label>
-                            <input type="number" name="tickets" id="tickets" min="1" max="3" value="{{ old('tickets') ?? '1' }}" class="rounded-lg border-2 border-gray-300 px-4 py-2 text-black @error('tickets') border-red-400 bg-red-200 @enderror">
-                            @error('tickets')
-                            <small class="text-red-700">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="flex flex-col space-y-2 flex-grow">
-                            <label for="donation" class="text-xl font-bold">Would you like to make an additional donation for LUTL?</label>
-                            <input type="number" name="donation" id="donation" value="{{ old('donation') }}" class="rounded-lg border-2 border-gray-300 px-4 py-2 text-black @error('donation') border-red-400 bg-red-200 @enderror">
-                            @error('donation')
-                            <small class="text-red-700">{{ $message }}</small>
-                            @enderror
-                        </div>
+{{--                    <div class="flex flex-col space-y-2 xl:space-y-0 xl:flex-row xl:space-x-6">--}}
+                    <div class="flex flex-col space-y-2 flex-grow hidden" id="tickets_form_group">
+                        <label for="tickets" class="text-xl font-bold">How many tickets would you like to purchase?</label>
+                        <input type="number" name="tickets" id="tickets" min="1" max="3" value="{{ old('tickets') ?? '1' }}" class="rounded-lg border-2 border-gray-300 px-4 py-2 text-black @error('tickets') border-red-400 bg-red-200 @enderror">
+                        <small class="text-gray-500">3 maximum</small>
+                        @error('tickets')
+                        <small class="text-red-700">{{ $message }}</small>
+                        @enderror
                     </div>
+{{--                        <div class="flex flex-col space-y-2 flex-grow">--}}
+{{--                            <label for="donation" class="text-xl font-bold">Would you like to make an additional donation for Lotus? If so, please indicate the amount here</label>--}}
+{{--                            <input type="number" name="donation" id="donation" value="{{ old('donation') }}" class="rounded-lg border-2 border-gray-300 px-4 py-2 text-black @error('donation') border-red-400 bg-red-200 @enderror">--}}
+{{--                            @error('donation')--}}
+{{--                            <small class="text-red-700">{{ $message }}</small>--}}
+{{--                            @enderror--}}
+{{--                            <small class="text-gray-500">Optional</small>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="flex flex-col space-y-2 mt-4">
-                        <label for="dietary" class="text-xl font-bold">Do you have any dietary restrictions?</label>
+                        <label for="dietary" class="text-xl font-bold">Please list any dietary restrictions here.</label>
                         <textarea rows="3" name="dietary" id="dietary" class="rounded-lg border-2 border-gray-300 px-4 py-2 text-black @error('dietary') border-red-400 bg-red-200 @enderror">{{ old('dietary') }}</textarea>
+                        <small class="text-gray-500">Optional</small>
                         @error('dietary')
                         <small class="text-red-700">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="flex flex-col space-y-2">
-                        <label for="accommodations" class="text-xl font-bold">Do you have auditory/visual impairments/disability accommodations?</label>
+                        <label for="accommodations" class="text-xl font-bold">Please indicate if you have any auditory, visual impairments, or disability accommodations here.</label>
                         <textarea rows="3" name="accommodations" id="accommodations" class="rounded-lg border-2 border-gray-300 px-4 py-2 text-black @error('name') border-red-400 bg-red-200 @enderror">{{ old('accommodations') }}</textarea>
-                        @error('name')
+                        <small class="text-gray-500">Optional</small>
+                        @error('accommodations')
                         <small class="text-red-700">{{ $message }}</small>
                         @enderror
                     </div>
@@ -238,23 +231,22 @@
     </section>
 
     <script>
-        $generalRadio = document.getElementById('holder_type__general')
         $studentRadio = document.getElementById('holder_type__student')
-        $sponsorRadio = document.getElementById('holder_type__sponsor')
+        $generalRadio = document.getElementById('holder_type__general')
         $emailLabel = document.querySelector('form#reserve label[for="email"]')
         $emailInput = document.querySelector('form#reserve input[name="email"]')
+        $ticketsFormGroup = document.getElementById('tickets_form_group')
 
-        const onNonStudent = () => {
-            $emailLabel.innerText = 'E-Mail:'
+        $generalRadio.addEventListener('change', () => {
+            $emailLabel.innerText = 'E-Mail'
             $emailInput.placeholder = 'you@domain.com'
-        }
+            $ticketsFormGroup.classList.remove('hidden')
+        })
 
-        $generalRadio.addEventListener('change', onNonStudent)
-        $sponsorRadio.addEventListener('change', onNonStudent)
-
-        $studentRadio.addEventListener('change', function () {
-            $emailLabel.innerText = 'Blazer E-Mail:'
+        $studentRadio.addEventListener('change', () => {
+            $emailLabel.innerText = 'Blazer E-Mail'
             $emailInput.placeholder = 'student@uab.edu'
+            $ticketsFormGroup.classList.add('hidden')
         })
     </script>
 

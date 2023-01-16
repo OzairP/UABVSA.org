@@ -3,8 +3,6 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LotusReservationsController;
 use App\Http\Controllers\RedirectionController;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Dompdf\Options;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,5 +38,11 @@ Route::get('/lotus2023/payment/success', [LotusReservationsController::class, 'p
 
 Route::get('/lotus2023/payment/cancel', [LotusReservationsController::class, 'paymentCancel'])
      ->name('lotus.payment.cancel');
+
+Route::get('/lotus2023/donate', [LotusReservationsController::class, 'donate'])
+     ->name('lotus.donate');
+
+Route::get('/lotus2023/donate/success', [LotusReservationsController::class, 'donationSuccess'])
+     ->name('lotus.donate.success');
 
 Route::get('/{redirection:slug}', [RedirectionController::class, 'redirect']);
