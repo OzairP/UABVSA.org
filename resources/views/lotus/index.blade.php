@@ -4,7 +4,7 @@
 @section('title', 'Lotus Under the Lights')
 
 @section('content')
-    <div class="landing w-screen h-screen min-h-screen">
+    <div class="landing w-screen h-screen min-h-screen bg-green-800">
         {{-- If the site is being hosted over expose.dev we don't want to load the video because it'll be too large --}}
         @unless(str_ends_with(request()->getHost(), 'sharedwithexpose.com'))
             <video
@@ -18,13 +18,10 @@
                 <h1 class="font-['Cinzel_Decorative'] text-white text-center text-5xl lg:text-8xl font-light" x-target="letter-effect">Lotus Under the Lights 3</h1>
                 <p class="text-white text-center md:text-xl w-max-[750px] mx-auto mt-5 md:mt-0">Short description of LUTL. To some, a moon is a courage for understanding. The popular lotus is easing, the new source is wrestling. A synthetic form of anger is the beauty.</p>
             </div>
-            <h3 class="text-white text-center text-2xl mt-5 font-sans" x-target="countdown">
-
-            </h3>
         </div>
 
         <div class="flex justify-center absolute bottom-[100px] z-20 w-full">
-            <a href="#reserve" class="decoration-0 bg-white rounded-3xl px-8 py-3 inline-block font-['Cinzel_Decorative'] text-red-700 font-black space-x-5 tracking-widest text-base hover:text-white hover:bg-red-700 transition-all duration-300">Reserve A Ticket</a>
+            <a href="#reserve" class="decoration-0 bg-yellow-400 hover:bg-zinc-800 text-zinc-800 hover:text-yellow-400 font-black rounded-3xl px-8 py-3 inline-block font-['Cinzel_Decorative'] space-x-5 tracking-widest text-base transition-all duration-300">Reserve A Ticket</a>
         </div>
     </div>
 
@@ -32,8 +29,8 @@
         <div class="container mx-auto px-5 lg:px-10 py-32">
             <div class="flex flex-col lg:flex-row flex-wrap w-100 content-center">
                 <div class="lg:w-2/3 lg:pr-10 mb-5 lg:mb-0">
-                    <h1 class="text-red-700 font-['Cinzel_Decorative'] text-6xl font-bold mb-2">About LUTL</h1>
-                    <div class="h-[2px] w-full bg-red-900 grad-1 rounded my-5"></div>
+                    <h1 class="text-yellow-400 font-['Cinzel_Decorative'] text-6xl font-bold mb-2">About LUTL</h1>
+                    <div class="h-[2px] w-full bg-yellow-300 grad-1 rounded my-5"></div>
                     <p class="text-lg lg:text-xl">
                         With our first show in 2019, Lotus Under the Lights has become one UAB VSA’s most anticipated events
                         on campus and has continued to grow into an extravagant celebration of the Vietnamese New Year, Tét.
@@ -59,13 +56,13 @@
         </div>
     </section>
 
-    <section class="bg-red-900 flex justify-center flex-col lg:flex-row flex-wrap pt-48 lg:pb-24 lg:px-8 xl:px-32">
+    <section class="bg-green-800 flex justify-center flex-col lg:flex-row flex-wrap pt-48 lg:pb-24 lg:px-8 xl:px-32">
 
         <div class="flex-grow w-full lg:w-1/3 text-white lg:pr-2 mb-5 lg:mb-0">
             <h1 class="text-5xl text-center lg:text-left lg:text-6xl font-['Cinzel_Decorative'] font-bold tracking-widest mb-5">Reserve Tickets</h1>
             <div class="px-5 xl:px-0">
-                <span class="bg-white rounded-2xl text-red-700 px-4 font-bold tracking-widest uppercase lg:mr-1 inline-block my-1">$7/ea</span>
-                <span class="bg-white rounded-2xl text-red-700 px-4 font-bold tracking-widest uppercase lg:ml-1 inline-block my-1">free for students<sup>*</sup></span>
+                <span class="bg-yellow-400 rounded-2xl text-green-800 px-4 font-bold tracking-widest uppercase lg:mr-1 inline-block my-1">$7/ea</span>
+                <span class="bg-yellow-400 rounded-2xl text-green-800 px-4 font-bold tracking-widest uppercase lg:ml-1 inline-block my-1">free for students<sup>*</sup></span>
             </div>
             <div class="mt-5 space-y-2 px-5 xl:px-0">
                 <p>{{ LotusReservation::remainingTickets() }} Tickets Remaining</p>
@@ -86,14 +83,14 @@
                     nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nisl nec aliquam aliquam, nunc
                     nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl.
                 </p>
-                <a href="#" class="flex flex-row align-center underline text-red-100">
+                <a href="#" class="flex flex-row align-center underline text-green-100">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline mr-1">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                     </svg>
                     Hill Student Center at UAB
                 </a>
-                <p class="flex flex-row align-center text-red-100">
+                <p class="flex flex-row align-center text-green-100">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline mr-1">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -147,7 +144,7 @@
                         <div class="radio-toolbar flex flex-col md:flex-row w-full">
                             <div class="flex-grow">
                                 <input type="radio" name="holder_type" id="holder_type__student" value="student" class="opacity-0 fixed w-0 peer" {{ !old('holder_type') ? 'checked' : (old('holder_type') === 'student' ? 'checked' : '')}}>
-                                <label for="holder_type__student" class="text-red-800 bg-red-100 inline-block px-4 py-4 hover:bg-red-200 peer-checked:bg-red-700 peer-checked:text-white w-full hover:cursor-pointer transition-all rounded-t md:rounded-tr-none md:rounded-l-lg">
+                                <label for="holder_type__student" class="text-white bg-green-500 inline-block px-4 py-4 hover:bg-green-600 peer-checked:bg-green-700 peer-checked:text-yellow-400 w-full hover:cursor-pointer transition-all rounded-t md:rounded-tr-none md:rounded-l-lg">
                                     <div class="flex flex-row align-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-2">
                                             <path d="M11.7 2.805a.75.75 0 01.6 0A60.65 60.65 0 0122.83 8.72a.75.75 0 01-.231 1.337 49.949 49.949 0 00-9.902 3.912l-.003.002-.34.18a.75.75 0 01-.707 0A50.009 50.009 0 007.5 12.174v-.224c0-.131.067-.248.172-.311a54.614 54.614 0 014.653-2.52.75.75 0 00-.65-1.352 56.129 56.129 0 00-4.78 2.589 1.858 1.858 0 00-.859 1.228 49.803 49.803 0 00-4.634-1.527.75.75 0 01-.231-1.337A60.653 60.653 0 0111.7 2.805z" />
@@ -160,7 +157,7 @@
                             </div>
                             <div class="flex-grow">
                                 <input type="radio" name="holder_type" id="holder_type__general" value="general" class="opacity-0 fixed w-0 peer" {{ old('holder_type') === 'general' ? 'checked' : '' }}>
-                                <label for="holder_type__general" class="text-red-800 bg-red-100 inline-block px-4 py-4 hover:bg-red-200 peer-checked:bg-red-700 peer-checked:text-white w-full hover:cursor-pointer transition-all rounded-b md:rounded-bl-none md:rounded-r-lg">
+                                <label for="holder_type__general" class="text-white bg-green-500 inline-block px-4 py-4 hover:bg-green-600 peer-checked:bg-green-700 peer-checked:text-yellow-400 w-full hover:cursor-pointer transition-all rounded-b md:rounded-bl-none md:rounded-r-lg">
                                     <div class="flex flex-row align-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-2">
                                             <path fill-rule="evenodd" d="M1.5 6.375c0-1.036.84-1.875 1.875-1.875h17.25c1.035 0 1.875.84 1.875 1.875v3.026a.75.75 0 01-.375.65 2.249 2.249 0 000 3.898.75.75 0 01.375.65v3.026c0 1.035-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 17.625v-3.026a.75.75 0 01.374-.65 2.249 2.249 0 000-3.898.75.75 0 01-.374-.65V6.375zm15-1.125a.75.75 0 01.75.75v.75a.75.75 0 01-1.5 0V6a.75.75 0 01.75-.75zm.75 4.5a.75.75 0 00-1.5 0v.75a.75.75 0 001.5 0v-.75zm-.75 3a.75.75 0 01.75.75v.75a.75.75 0 01-1.5 0v-.75a.75.75 0 01.75-.75zm.75 4.5a.75.75 0 00-1.5 0V18a.75.75 0 001.5 0v-.75zM6 12a.75.75 0 01.75-.75H12a.75.75 0 010 1.5H6.75A.75.75 0 016 12zm.75 2.25a.75.75 0 000 1.5h3a.75.75 0 000-1.5h-3z" clip-rule="evenodd" />
@@ -223,7 +220,9 @@
                         @enderror
                     </div>
                     {{ @csrf_field() }}
-                    <button type="submit" class="text-white bg-gradient-to-r from-red-500 to-rose-600 hover:to-red-500 hover:from-rose-600 transition-all inline-block px-9 py-3 rounded-md" @if(LotusReservation::isSoldOut() || !LotusReservation::acceptingNewReservations()) disabled @endif>Submit</button>
+                    <div class="flex justify-end">
+                        <button type="submit" class="text-white bg-emerald-600 hover:bg-emerald-700 transition-all inline-block px-9 py-3 rounded-md" @if(LotusReservation::isSoldOut() || !LotusReservation::acceptingNewReservations()) disabled @endif>Submit</button>
+                    </div>
                 </form>
             </div>
         </div>

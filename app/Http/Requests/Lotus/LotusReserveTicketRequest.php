@@ -41,12 +41,12 @@ class LotusReserveTicketRequest extends FormRequest
 //            }
 //        });
 
-//        $validator->after(function (Validator $validator) {
-//            if ($this->get('holder_type') === 'student' && !str_ends_with($this->get('email'), '@uab.edu')) {
-//                $validator->errors()
-//                          ->add('email', 'Must be a @uab.edu email.');
-//            }
-//        });
+        $validator->after(function (Validator $validator) {
+            if ($this->get('holder_type') === 'student' && !str_ends_with($this->get('email'), '@uab.edu')) {
+                $validator->errors()
+                          ->add('email', 'Must be a @uab.edu email.');
+            }
+        });
 
         $validator->after(function (Validator $validator) {
             if (!LotusReservation::acceptingNewReservations()) {

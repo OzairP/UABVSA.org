@@ -113,6 +113,9 @@ class LotusReservationsController extends Controller
 
         return view('lotus.reserving.success', [
             'reservation' => $reservation,
+            'downloadLink' => URL::signedRoute('lotus.reserve.download', [
+                'reservation' => $reservation->id,
+            ]),
         ]);
     }
 
@@ -147,6 +150,9 @@ class LotusReservationsController extends Controller
 
         return view('lotus.reserving.success', [
             'reservation' => $reservation,
+            'downloadLink' => URL::signedRoute('lotus.reserve.download', [
+                'reservation' => $reservation->id,
+            ]),
         ]);
     }
 
@@ -168,16 +174,17 @@ class LotusReservationsController extends Controller
 
     public function donate ()
     {
-        $reservation = NULL;
+        $reservationId = NULL;
 
         if (Session::has('reservation')) {
             $reservation = LotusReservation::find(Session::get('reservation'));
+            $reservationId = $reservation->id;
         }
 
         return Checkout::guest()
                        ->create(['price_1MJ3XNG3vywsysV9lt9LFxUX'], [
                            'success_url' => route('lotus.donate.success', [
-                                   'reservation' => $reservation->id,
+                                   'reservation' => $reservationId,
                                ]) . '&session_id={CHECKOUT_SESSION_ID}',
                            'cancel_url'  => route('home'),
                        ]);
@@ -205,6 +212,17 @@ class LotusReservationsController extends Controller
         }
 
         return view('lotus.reserving.donated');
+    }
+
+    public function downloadReservation (Request $request)
+    {
+        if (!$request->hasValidSignature()) {
+            abort(401);
+        }
+
+        $reservation = LotusReservation::findOrFail($request->get('reservation'));
+
+        return $reservation->generatePDF()->stream('Lotus Reservation (' . $reservation->name . ').pdf');
     }
 
 }

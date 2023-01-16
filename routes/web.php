@@ -30,6 +30,9 @@ Route::get('/lotus2023', [LotusReservationsController::class, 'index'])
 Route::post('/lotus2023/reserve', [LotusReservationsController::class, 'reserve'])
      ->name('lotus.reserve');
 
+Route::get('/lotus2023/reservation/download', [LotusReservationsController::class, 'downloadReservation'])
+     ->name('lotus.reserve.download');
+
 Route::get('/lotus2023/verification/complete', [LotusReservationsController::class, 'completeVerification'])
      ->name('lotus.verification.complete');
 
