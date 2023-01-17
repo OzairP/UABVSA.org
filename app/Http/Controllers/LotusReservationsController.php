@@ -33,8 +33,16 @@ class LotusReservationsController extends Controller
             ]);
         }
 
-        if ($reservation = LotusReservation::whereEmail($request->get('email'))
-                                           ->first()) {
+        if ($reservation = LotusReservation::findByEmail($request->get('email'))) {
+            if ($reservation->isConfirmed()) {
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->withErrors([
+                        'error' => 'You have already reserved a ticket.',
+                    ]);
+            }
+
             Log::info('Reservation already exists for ' . $request->get('email'));
             $reservation->delete();
             Log::info('Reservation deleted for ' . $request->get('email'));
@@ -112,7 +120,7 @@ class LotusReservationsController extends Controller
         Session::put('reservation', $reservation->id);
 
         return view('lotus.reserving.success', [
-            'reservation' => $reservation,
+            'reservation'  => $reservation,
             'downloadLink' => URL::signedRoute('lotus.reserve.download', [
                 'reservation' => $reservation->id,
             ]),
@@ -135,7 +143,7 @@ class LotusReservationsController extends Controller
             ]);
         }
 
-        if ($reservation->isNotPending()) {
+        if ($reservation->isConfirmed()) {
             Log::warning('Reservation not pending for ' . $reservation->id);
             abort(401);
         }
@@ -149,7 +157,7 @@ class LotusReservationsController extends Controller
         Session::put('reservation', $reservation->id);
 
         return view('lotus.reserving.success', [
-            'reservation' => $reservation,
+            'reservation'  => $reservation,
             'downloadLink' => URL::signedRoute('lotus.reserve.download', [
                 'reservation' => $reservation->id,
             ]),
@@ -161,7 +169,7 @@ class LotusReservationsController extends Controller
         Log::info('Payment cancelled for ' . $request->get('reservation'));
         $reservation = LotusReservation::findOrFail($request->get('reservation'));
 
-        if ($reservation->isNotPending()) {
+        if ($reservation->isConfirmed()) {
             Log::warning('Reservation not pending for ' . $reservation->id);
             abort(401);
         }
@@ -222,7 +230,8 @@ class LotusReservationsController extends Controller
 
         $reservation = LotusReservation::findOrFail($request->get('reservation'));
 
-        return $reservation->generatePDF()->stream('Lotus Reservation (' . $reservation->name . ').pdf');
+        return $reservation->generatePDF()
+                           ->stream('Lotus Reservation (' . $reservation->name . ').pdf');
     }
 
 }

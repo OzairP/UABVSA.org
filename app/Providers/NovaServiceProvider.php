@@ -47,7 +47,8 @@ BLADE
 
         NovaSettings::addSettingsFields([
             Boolean::make('Allow New Reservations', 'lotus_allow_new_reservations'),
-            Number::make('Ticket Capacity', 'lotus_ticket_capacity'),
+            Number::make('Student Ticket Capacity', 'lotus_ticket_student_capacity'),
+            Number::make('General Ticket Capacity', 'lotus_ticket_general_capacity'),
             Text::make('Stripe Product Id', 'lotus_stripe_product_id'),
         ], [], 'Lotus Ticket Settings');
     }

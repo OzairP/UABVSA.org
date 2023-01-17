@@ -70,6 +70,16 @@ class LotusReservation extends Model
         return static::sum('tickets');
     }
 
+    public static function countStudentTickets ()
+    {
+        return static::where('holder_type', 'student')->sum('tickets');
+    }
+
+    public static function countGeneralTickets ()
+    {
+        return static::where('holder_type', 'general')->sum('tickets');
+    }
+
     public static function countConfirmedReservedTickets ()
     {
         return static::where('pending', false)->sum('tickets');
@@ -77,12 +87,32 @@ class LotusReservation extends Model
 
     public static function isSoldOut ()
     {
-        return static::countReservedTickets() >= nova_get_setting('lotus_ticket_capacity');
+        return static::countReservedTickets() >= (nova_get_setting('lotus_ticket_general_capacity') + nova_get_setting('lotus_ticket_student_capacity'));
+    }
+
+    public static function isSoldOutForStudents ()
+    {
+        return static::countStudentTickets() >= nova_get_setting('lotus_ticket_student_capacity');
+    }
+
+    public static function isSoldOutForGeneral ()
+    {
+        return static::countGeneralTickets() >= nova_get_setting('lotus_ticket_general_capacity');
     }
 
     public static function remainingTickets ()
     {
-        return nova_get_setting('lotus_ticket_capacity') - static::countReservedTickets();
+        return (nova_get_setting('lotus_ticket_general_capacity') + nova_get_setting('lotus_ticket_student_capacity')) - static::countReservedTickets();
+    }
+
+    public static function remainingStudentTickets ()
+    {
+        return nova_get_setting('lotus_ticket_student_capacity') - static::where('holder_type', 'student')->sum('tickets');
+    }
+
+    public static function remainingGeneralTickets ()
+    {
+        return nova_get_setting('lotus_ticket_general_capacity') - static::where('holder_type', 'general')->sum('tickets');
     }
 
     public static function createPendingReservation (array $data): LotusReservation
@@ -92,12 +122,17 @@ class LotusReservation extends Model
         ]));
     }
 
+    public static function findByEmail (string $email): ?LotusReservation
+    {
+        return static::where('email', $email)->first();
+    }
+
     public function isPending ()
     {
         return $this->pending;
     }
 
-    public function isNotPending (): bool
+    public function isConfirmed (): bool
     {
         return !$this->isPending();
     }

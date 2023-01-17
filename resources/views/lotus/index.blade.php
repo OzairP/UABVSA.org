@@ -15,8 +15,11 @@
         <div class="h-full w-full flex flex-col px-5 z-10 absolute top-0 container-xl mx-auto pt-40">
             <div>
                 <h3 class="text-white text-center text-2xl mb-5">The Vietnamese Student Association at UAB™ presents</h3>
-                <h1 class="font-['Cinzel_Decorative'] text-white text-center text-5xl lg:text-8xl font-light" x-target="letter-effect">Lotus Under the Lights 3</h1>
-                <p class="text-white text-center md:text-xl w-max-[750px] mx-auto mt-5 md:mt-0">Short description of LUTL. To some, a moon is a courage for understanding. The popular lotus is easing, the new source is wrestling. A synthetic form of anger is the beauty.</p>
+                <h1 class="font-['Cinzel_Decorative'] text-white text-center text-5xl lg:text-8xl font-light" x-target="letter-effect">Lotus Under the Lights
+                    <span class="text-yellow-400">3</span></h1>
+                <p class="text-white text-center md:text-xl max-w-3xl max-w-prose mx-auto mt-5 md:mt-0">
+                    This year’s Lotus 3 theme goes along with the motto <span class="text-yellow-300">“Where We Belong”</span> centering friendship and self-identity. While a family is something you’re born in, your best friends are your own chosen home. Through thick and thin, one can find themselves supported by those they cherish with whatever life throws at them.
+                </p>
             </div>
         </div>
 
@@ -56,7 +59,7 @@
         </div>
     </section>
 
-    <section class="bg-green-800 flex justify-center flex-col lg:flex-row flex-wrap pt-48 lg:pb-24 lg:px-8 xl:px-32">
+    <section class="bg-green-900 flex justify-center flex-col lg:flex-row flex-wrap pt-48 lg:pb-24 lg:px-8 xl:px-32">
 
         <div class="flex-grow w-full lg:w-1/3 text-white lg:pr-2 mb-5 lg:mb-0">
             <h1 class="text-5xl text-center lg:text-left lg:text-6xl font-['Cinzel_Decorative'] font-bold tracking-widest mb-5">Reserve Tickets</h1>
@@ -64,25 +67,23 @@
                 <span class="bg-yellow-400 rounded-2xl text-green-800 px-4 font-bold tracking-widest uppercase lg:mr-1 inline-block my-1">$7/ea</span>
                 <span class="bg-yellow-400 rounded-2xl text-green-800 px-4 font-bold tracking-widest uppercase lg:ml-1 inline-block my-1">free for students<sup>*</sup></span>
             </div>
+            <div class="mt-5 space-y-1 px-5 xl:px-0">
+                <p>
+                    UAB student tickets are available for all UAB-affiliated students, faculty, and staff with a valid BlazerID.
+                    Each UAB email address is limited to only ONE ticket. A food voucher will be given to the first 80 UAB students
+                    to check in to the venue.
+                </p>
+                <p class="pl-3"><strong>Tickets remaining for UAB Student / Faculty</strong>: {{ LotusReservation::remainingStudentTickets() }}</p>
+                <small>* Limit 1 ticket per student</small>
+            </div>
             <div class="mt-5 space-y-2 px-5 xl:px-0">
-                <p>{{ LotusReservation::remainingTickets() }} Tickets Remaining</p>
-                <p>Short description of ticketing process</p>
-                <p>Short description of what come with tickets</p>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec aliquam aliquam, nunc
-                    nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nisl nec aliquam aliquam, nunc
-                    nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl.
+                    General attendee tickets are sold for $7 each. Non-UAB attendees are allowed to purchase up to 3 tickets per
+                    email address. All 70 general attendee tickets will be guaranteed a food voucher.
                 </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec aliquam aliquam, nunc
-                    nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nisl nec aliquam aliquam, nunc
-                    nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec aliquam aliquam, nunc
-                    nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nisl nec aliquam aliquam, nunc
-                    nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl.
-                </p>
+                <p class="pl-3"><strong>Tickets remaining for General Admission</strong>: {{ LotusReservation::remainingGeneralTickets() }}</p>
+            </div>
+            <div class="mt-5 space-y-1 px-5 xl:px-0">
                 <a href="#" class="flex flex-row align-center underline text-green-100">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline mr-1">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -96,7 +97,6 @@
                     </svg>
                     Saturday, February 18th, 2023 - 7:00 PM
                 </p>
-                <small>* Limit 1 ticket per student</small>
             </div>
         </div>
 
@@ -126,6 +126,31 @@
                                 <p class="break-all">All tickets are sold out.</p>
                             </div>
                         </div>
+                    @else
+                        @if(LotusReservation::isSoldOutForStudents())
+                        <div class="bg-red-100 text-red-700 px-6 py-4 rounded-lg text-black flex flex-row">
+                            <div class="error-icon flex-shrink flex items-center mr-2 stroke-red-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-red-700">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                </svg>
+                            </div>
+                            <div class="error-info flex-grow">
+                                <p class="break-all">All Student / Faculty tickets are sold out.</p>
+                            </div>
+                        </div>
+                        @endif
+                        @if(LotusReservation::isSoldOutForGeneral())
+                        <div class="bg-red-100 text-red-700 px-6 py-4 rounded-lg text-black flex flex-row">
+                            <div class="error-icon flex-shrink flex items-center mr-2 stroke-red-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-red-700">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                </svg>
+                            </div>
+                            <div class="error-info flex-grow">
+                                <p class="break-all">All General Admission tickets are sold out.</p>
+                            </div>
+                        </div>
+                        @endif
                     @endif
                     @error('error')
                     <div class="bg-red-100 text-red-700 px-6 py-4 rounded-lg text-black flex flex-row">
@@ -151,7 +176,7 @@
                                             <path d="M13.06 15.473a48.45 48.45 0 017.666-3.282c.134 1.414.22 2.843.255 4.285a.75.75 0 01-.46.71 47.878 47.878 0 00-8.105 4.342.75.75 0 01-.832 0 47.877 47.877 0 00-8.104-4.342.75.75 0 01-.461-.71c.035-1.442.121-2.87.255-4.286A48.4 48.4 0 016 13.18v1.27a1.5 1.5 0 00-.14 2.508c-.09.38-.222.753-.397 1.11.452.213.901.434 1.346.661a6.729 6.729 0 00.551-1.608 1.5 1.5 0 00.14-2.67v-.645a48.549 48.549 0 013.44 1.668 2.25 2.25 0 002.12 0z" />
                                             <path d="M4.462 19.462c.42-.419.753-.89 1-1.394.453.213.902.434 1.347.661a6.743 6.743 0 01-1.286 1.794.75.75 0 11-1.06-1.06z" />
                                         </svg>
-                                        <span>UAB Student</span>
+                                        <span>UAB Student / Faculty</span>
                                     </div>
                                 </label>
                             </div>

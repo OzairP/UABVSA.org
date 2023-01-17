@@ -63,6 +63,20 @@ class LotusReserveTicketRequest extends FormRequest
         });
 
         $validator->after(function (Validator $validator) {
+            if ($this->get('holder_type') === 'student' && LotusReservation::isSoldOutForStudents()) {
+                $validator->errors()
+                          ->add('error', 'Student / Faculty tickets are currently sold out.');
+            }
+        });
+
+        $validator->after(function (Validator $validator) {
+            if ($this->get('holder_type') === 'general' && LotusReservation::isSoldOutForGeneral()) {
+                $validator->errors()
+                          ->add('error', 'General Admission tickets are currently sold out.');
+            }
+        });
+
+        $validator->after(function (Validator $validator) {
             if ($this->get('tickets') > LotusReservation::remainingTickets()) {
                 $validator->errors()
                           ->add('error', 'You cannot reserve more tickets than are available.');
