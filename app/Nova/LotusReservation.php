@@ -78,6 +78,14 @@ class LotusReservation extends Resource
                  ->storedInMinorUnits()
                  ->sortable(),
 
+            Money::make('Donation Amount')
+                 ->storedInMinorUnits()
+                 ->sortable(),
+
+            Textarea::make('Affiliation')
+                    ->nullable()
+                    ->hideFromIndex(),
+
             Textarea::make('Dietary')
                     ->nullable()
                     ->hideFromIndex(),
@@ -87,6 +95,10 @@ class LotusReservation extends Resource
                     ->hideFromIndex(),
 
             Text::make('Stripe Payment ID')
+                ->readonly()
+                ->nullable(),
+
+            Text::make('Donation Stripe Payment ID')
                 ->readonly()
                 ->nullable(),
 

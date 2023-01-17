@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('tickets');
             $table->string('dietary')->nullable();
             $table->string('accommodations')->nullable();
+            $table->string('affiliation')->nullable();
             $table->integer('charged_price')->default(0);
             $table->boolean('pending')->default(false);
             $table->string('stripe_payment_id')->nullable();

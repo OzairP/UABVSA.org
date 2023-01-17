@@ -69,19 +69,19 @@
             </div>
             <div class="mt-5 space-y-1 px-5 xl:px-0">
                 <p>
-                    UAB student tickets are available for all UAB-affiliated students, faculty, and staff with a valid BlazerID.
-                    Each UAB email address is limited to only ONE ticket. A food voucher will be given to the first 80 UAB students
-                    to check in to the venue.
+                    UAB student / faculty tickets are available for all UAB-affiliated students, faculty, and staff with a valid BlazerID.
+                    Each UAB email address is limited to only ONE ticket.
                 </p>
-                <p class="pl-3"><strong>Tickets remaining for UAB Student / Faculty</strong>: {{ LotusReservation::remainingStudentTickets() }}</p>
+{{--                <p class="pl-3"><strong>Tickets remaining for UAB Student / Faculty</strong>: {{ LotusReservation::remainingStudentTickets() }}</p>--}}
                 <small>* Limit 1 ticket per student</small>
             </div>
             <div class="mt-5 space-y-2 px-5 xl:px-0">
                 <p>
-                    General attendee tickets are sold for $7 each. Non-UAB attendees are allowed to purchase up to 3 tickets per
-                    email address. All 70 general attendee tickets will be guaranteed a food voucher.
+                    General attendee tickets are sold for $7 each. General attendees are allowed to purchase up to 3 tickets per
+                    email address.
                 </p>
-                <p class="pl-3"><strong>Tickets remaining for General Admission</strong>: {{ LotusReservation::remainingGeneralTickets() }}</p>
+                <p class="italic">Please note that if you purchase multiple tickets, your full party MUST be present to check in with you.</p>
+{{--                <p class="pl-3"><strong>Tickets remaining for General Admission</strong>: {{ LotusReservation::remainingGeneralTickets() }}</p>--}}
             </div>
             <div class="mt-5 space-y-1 px-5 xl:px-0">
                 <a href="#" class="flex flex-row align-center underline text-green-100">
@@ -95,7 +95,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline mr-1">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Saturday, February 18th, 2023 - 7:00 PM
+                    Saturday, February 18th, 2023 - 6:00 PM
                 </p>
             </div>
         </div>
@@ -219,15 +219,14 @@
                         <small class="text-red-700">{{ $message }}</small>
                         @enderror
                     </div>
-{{--                        <div class="flex flex-col space-y-2 flex-grow">--}}
-{{--                            <label for="donation" class="text-xl font-bold">Would you like to make an additional donation for Lotus? If so, please indicate the amount here</label>--}}
-{{--                            <input type="number" name="donation" id="donation" value="{{ old('donation') }}" class="rounded-lg border-2 border-gray-300 px-4 py-2 text-black @error('donation') border-red-400 bg-red-200 @enderror">--}}
-{{--                            @error('donation')--}}
-{{--                            <small class="text-red-700">{{ $message }}</small>--}}
-{{--                            @enderror--}}
-{{--                            <small class="text-gray-500">Optional</small>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    <div class="flex flex-col space-y-2 flex-grow hidden" id="affiliation_form_group">
+                        <label for="affiliation" class="text-xl font-bold">If you are from another VSA, please indicate which school you are from here.</label>
+                        <input type="text" name="affiliation" id="affiliation" value="{{ old('affiliation') }}" class="rounded-lg border-2 border-gray-300 px-4 py-2 text-black @error('affiliation') border-red-400 bg-red-200 @enderror">
+                        <small class="text-gray-500">Optional</small>
+                        @error('affiliation')
+                        <small class="text-red-700">{{ $message }}</small>
+                        @enderror
+                    </div>
                     <div class="flex flex-col space-y-2 mt-4">
                         <label for="dietary" class="text-xl font-bold">Please list any dietary restrictions here.</label>
                         <textarea rows="3" name="dietary" id="dietary" class="rounded-lg border-2 border-gray-300 px-4 py-2 text-black @error('dietary') border-red-400 bg-red-200 @enderror">{{ old('dietary') }}</textarea>
@@ -260,17 +259,20 @@
         $emailLabel = document.querySelector('form#reserve label[for="email"]')
         $emailInput = document.querySelector('form#reserve input[name="email"]')
         $ticketsFormGroup = document.getElementById('tickets_form_group')
+        $affiliationFormGroup = document.getElementById('affiliation_form_group')
 
         $generalRadio.addEventListener('change', () => {
             $emailLabel.innerText = 'E-Mail'
             $emailInput.placeholder = 'you@domain.com'
             $ticketsFormGroup.classList.remove('hidden')
+            $affiliationFormGroup.classList.remove('hidden')
         })
 
         $studentRadio.addEventListener('change', () => {
             $emailLabel.innerText = 'Blazer E-Mail'
             $emailInput.placeholder = 'student@uab.edu'
             $ticketsFormGroup.classList.add('hidden')
+            $affiliationFormGroup.classList.add('hidden')
         })
     </script>
 

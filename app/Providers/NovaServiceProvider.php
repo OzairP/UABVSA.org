@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Models\User;
-use App\Nova\Dashboards\LotusDashboard;
 use App\Nova\Dashboards\Home;
+use App\Nova\Dashboards\LotusDashboard;
 use App\Nova\Dashboards\Sys;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +41,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
         Nova::footer(fn($request) => Blade::render(<<<'BLADE'
             <p class="text-center">uabvsa.org · created by <a class="link-default" href="mailto:ozairpatel2@gmail.com">Ozair Patel</a>.</p>
-            <p class="text-center">Powered by <a class="link-default" href="https://nova.laravel.com">Laravel Nova</a> · v4.7.0 (Silver Surfer)</p>
 BLADE
         ));
 
@@ -49,7 +48,10 @@ BLADE
             Boolean::make('Allow New Reservations', 'lotus_allow_new_reservations'),
             Number::make('Student Ticket Capacity', 'lotus_ticket_student_capacity'),
             Number::make('General Ticket Capacity', 'lotus_ticket_general_capacity'),
-            Text::make('Stripe Product Id', 'lotus_stripe_product_id'),
+            Text::make('Stripe Ticket Price API Id', 'lotus_stripe_ticket_price_id')
+                ->help("Can be found in Stripe Product > Price API ID. This product should have the Standard Pricing model"),
+            Text::make('Stripe Donation API Id', 'lotus_stripe_donation_price_id')
+                ->help("Can be found in Stripe Product > Price API ID. This product should have the Customer Choose Price model"),
         ], [], 'Lotus Ticket Settings');
     }
 
@@ -97,7 +99,7 @@ BLADE
         return [
             new Home,
             new LotusDashboard,
-            new Sys
+            new Sys,
         ];
     }
 
@@ -109,7 +111,7 @@ BLADE
     {
         return [
             new NovaHealth,
-            new NovaSettings
+            new NovaSettings,
         ];
     }
 }

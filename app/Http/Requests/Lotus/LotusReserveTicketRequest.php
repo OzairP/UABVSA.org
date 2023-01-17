@@ -20,6 +20,7 @@ class LotusReserveTicketRequest extends FormRequest
             'name'           => 'required|string',
             'email'          => 'required|email',
             'tickets'        => 'required|integer|min:1|max:3',
+            'affiliation'    => 'nullable|string',
             'dietary'        => 'nullable|string',
             'accommodations' => 'nullable|string',
         ];

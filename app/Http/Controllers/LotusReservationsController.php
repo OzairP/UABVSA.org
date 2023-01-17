@@ -87,7 +87,7 @@ class LotusReservationsController extends Controller
 
         return Checkout::guest()
                        ->create([
-                           nova_get_setting('lotus_stripe_product_id') => $reservation->tickets,
+                           nova_get_setting('lotus_stripe_ticket_price_id') => $reservation->tickets,
                        ], [
                            'success_url' => route('lotus.payment.success', [
                                    'reservation' => $reservation->id,

@@ -42,6 +42,8 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
  * @property string|null $donation_stripe_payment_id
  * @method static \Illuminate\Database\Eloquent\Builder|LotusReservation whereDonation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LotusReservation whereDonationStripePaymentId($value)
+ * @property string|null $affiliation
+ * @method static \Illuminate\Database\Eloquent\Builder|LotusReservation whereAffiliation($value)
  */
 class LotusReservation extends Model
 {
@@ -53,6 +55,7 @@ class LotusReservation extends Model
         'name',
         'email',
         'tickets',
+        'affiliation',
         'dietary',
         'accommodations',
         'charged_price',
