@@ -7,6 +7,7 @@ use App\Nova\Actions\Lotus\EmailTickets;
 use Laravel\Nova\Actions\Actionable;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Email;
+use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
@@ -63,7 +64,6 @@ class LotusReservation extends Resource
                   ->options([
                       'student' => 'Student',
                       'general' => 'General Admission',
-                      'sponsor' => 'Sponsor',
                   ])
                   ->sortable(),
 
@@ -94,18 +94,22 @@ class LotusReservation extends Resource
                     ->nullable()
                     ->hideFromIndex(),
 
-            Text::make('Stripe Payment ID')
-                ->readonly()
-                ->nullable(),
-
-            Text::make('Donation Stripe Payment ID')
-                ->readonly()
-                ->nullable(),
-
             Boolean::make('Confirmed', 'pending')
                    ->trueValue(FALSE)
                    ->falseValue(TRUE)
                    ->sortable(),
+
+            Heading::make('Stripe'),
+
+            Text::make('Stripe Payment ID')
+                ->readonly()
+                ->hideFromIndex()
+                ->nullable(),
+
+            Text::make('Donation Stripe Payment ID')
+                ->readonly()
+                ->hideFromIndex()
+                ->nullable(),
         ];
     }
 
