@@ -17,9 +17,9 @@ class GeneralReservationVolume extends Progress
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, LotusReservation::class, function ($query) {
+        return $this->sum($request, LotusReservation::class, function ($query) {
             return $query->where('holder_type', 'general');
-        }, target: LotusSettings::generalTicketCapacity());
+        }, 'tickets', target: LotusSettings::generalTicketCapacity());
     }
 
     /**

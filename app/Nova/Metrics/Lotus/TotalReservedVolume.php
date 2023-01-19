@@ -19,9 +19,9 @@ class TotalReservedVolume extends Progress
      */
     public function calculate (NovaRequest $request)
     {
-        return $this->count($request, LotusReservation::class, function ($query) {
+        return $this->sum($request, LotusReservation::class, function ($query) {
             return $query;
-        }, target: LotusSettings::totalTicketCapacity());
+        },  'tickets', target: LotusSettings::totalTicketCapacity());
     }
 
     /**
