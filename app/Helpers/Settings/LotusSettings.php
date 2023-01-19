@@ -2,6 +2,9 @@
 
 namespace App\Helpers\Settings;
 
+use DB;
+use Log;
+
 class LotusSettings
 {
 
@@ -47,6 +50,13 @@ class LotusSettings
 
     public static function hospitalityPacketUrl ()
     {
+        $novaSettingsMigrationsRan = DB::table('migrations')->where('migration', '2019_08_13_000000_create_nova_settings_table')->exists();
+
+        if (!$novaSettingsMigrationsRan) {
+            Log::warning('LotusSettings::hospitalityPacketUrl() called before nova settings migrations ran.');
+            return '/';
+        }
+
         return nova_get_setting('lotus_hospitality_packet_url');
     }
 
