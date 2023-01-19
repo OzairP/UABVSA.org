@@ -268,8 +268,8 @@
                     </tr>
                     <tr>
                         <td class="ticket-details-row__info">
-                            <p>Doors Open</p>
-                            <p>5:00 PM CST</p>
+                            <p>Event Starts</p>
+                            <p>6:00 PM CST</p>
                         </td>
                         <td class="ticket-details-row__info">
                             <p>Dress Attire</p>
