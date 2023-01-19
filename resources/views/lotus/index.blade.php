@@ -65,7 +65,7 @@
             <h1 class="text-5xl text-center lg:text-left lg:text-6xl font-['Cinzel_Decorative'] font-bold tracking-widest mb-5">Reserve Tickets</h1>
             <div class="px-5 xl:px-0">
                 <span class="bg-yellow-400 rounded-2xl text-green-800 px-4 font-bold tracking-widest uppercase lg:mr-1 inline-block my-1">$7/ea</span>
-                <span class="bg-yellow-400 rounded-2xl text-green-800 px-4 font-bold tracking-widest uppercase lg:ml-1 inline-block my-1">free for students<sup>*</sup></span>
+                <span class="bg-yellow-400 rounded-2xl text-green-800 px-4 font-bold tracking-widest uppercase lg:ml-1 inline-block my-1">free for student / faculty<sup>*</sup></span>
             </div>
             <div class="mt-5 space-y-1 px-5 xl:px-0">
                 <p>
