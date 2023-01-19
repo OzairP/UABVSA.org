@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Menu\Menu;
 use Laravel\Nova\Menu\MenuItem;
@@ -46,6 +47,8 @@ BLADE
 
         NovaSettings::addSettingsFields([
             Boolean::make('Allow New Reservations', 'lotus_allow_new_reservations'),
+            Boolean::make('Use Automatic Student Validation', 'lotus_automatic_student_validation')
+                ->help('Enabling this will use automated emails to validate students. Disabling this will require manual validation. Only enable this if you\'re sure UAB students can receive emails from this server.'),
             Number::make('Student Ticket Capacity', 'lotus_ticket_student_capacity'),
             Number::make('General Ticket Capacity', 'lotus_ticket_general_capacity'),
             Text::make('Stripe Ticket Price API Id', 'lotus_stripe_ticket_price_id')

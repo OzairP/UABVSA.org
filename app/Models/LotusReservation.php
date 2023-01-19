@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Settings\LotusSettings;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -65,7 +66,7 @@ class LotusReservation extends Model
 
     public static function acceptingNewReservations ()
     {
-        return nova_get_setting('lotus_allow_new_reservations');
+        return LotusSettings::acceptingNewReservations();
     }
 
     public static function countConfirmedReservedTickets ()
@@ -76,7 +77,7 @@ class LotusReservation extends Model
 
     public static function isSoldOut ()
     {
-        return static::countReservedTickets() >= (nova_get_setting('lotus_ticket_general_capacity') + nova_get_setting('lotus_ticket_student_capacity'));
+        return static::countReservedTickets() >= LotusSettings::totalTicketCapacity();
     }
 
     public static function countReservedTickets ()
@@ -84,9 +85,9 @@ class LotusReservation extends Model
         return static::sum('tickets');
     }
 
-    public static function isSoldOutForStudents ()
+    public static function isSoldOutForStudents (): bool
     {
-        return static::countStudentTickets() >= nova_get_setting('lotus_ticket_student_capacity');
+        return static::countStudentTickets() >= LotusSettings::studentTicketCapacity();
     }
 
     public static function countStudentTickets ()
@@ -95,9 +96,9 @@ class LotusReservation extends Model
                      ->sum('tickets');
     }
 
-    public static function isSoldOutForGeneral ()
+    public static function isSoldOutForGeneral (): bool
     {
-        return static::countGeneralTickets() >= nova_get_setting('lotus_ticket_general_capacity');
+        return static::countGeneralTickets() >= LotusSettings::generalTicketCapacity();
     }
 
     public static function countGeneralTickets ()
@@ -108,18 +109,18 @@ class LotusReservation extends Model
 
     public static function remainingTickets ()
     {
-        return (nova_get_setting('lotus_ticket_general_capacity') + nova_get_setting('lotus_ticket_student_capacity')) - static::countReservedTickets();
+        return LotusSettings::totalTicketCapacity() - static::countReservedTickets();
     }
 
     public static function remainingStudentTickets ()
     {
-        return nova_get_setting('lotus_ticket_student_capacity') - static::where('holder_type', 'student')
-                                                                         ->sum('tickets');
+        return LotusSettings::studentTicketCapacity() - static::where('holder_type', 'student')
+                                                              ->sum('tickets');
     }
 
     public static function remainingGeneralTickets ()
     {
-        return nova_get_setting('lotus_ticket_general_capacity') - static::where('holder_type', 'general')
+        return LotusSettings::generalTicketCapacity() - static::where('holder_type', 'general')
                                                                          ->sum('tickets');
     }
 

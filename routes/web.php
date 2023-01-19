@@ -48,8 +48,4 @@ Route::get('/lotus2023/donate', [LotusReservationsController::class, 'donate'])
 Route::get('/lotus2023/donate/success', [LotusReservationsController::class, 'donationSuccess'])
      ->name('lotus.donate.success');
 
-Route::get('/lotus2023/pdf', function () {
-    return \App\Models\LotusReservation::find(1)->generatePDF()->stream();
-});
-
 Route::get('/{redirection:slug}', [RedirectionController::class, 'redirect']);

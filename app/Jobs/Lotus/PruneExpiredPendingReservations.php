@@ -31,7 +31,8 @@ class PruneExpiredPendingReservations implements ShouldQueue
     public function handle()
     {
         LotusReservation::where('pending', true)
-                        ->where('created_at', '<', now()->subMinutes(5))
+                        ->where('holder_type', 'general')
+                        ->where('created_at', '<', now()->subMinutes(10))
                         ->delete();
     }
 }

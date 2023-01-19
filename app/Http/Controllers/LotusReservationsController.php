@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Settings\LotusSettings;
 use App\Http\Requests\Lotus\LotusReserveTicketRequest;
 use App\Mail\Lotus\SendReservationTicket;
 use App\Mail\Lotus\VerifyUABEmail;
@@ -87,7 +88,7 @@ class LotusReservationsController extends Controller
 
         return Checkout::guest()
                        ->create([
-                           nova_get_setting('lotus_stripe_ticket_price_id') => $reservation->tickets,
+                           LotusSettings::stripeTicketPriceId() => $reservation->tickets,
                        ], [
                            'success_url' => route('lotus.payment.success', [
                                    'reservation' => $reservation->id,

@@ -2,6 +2,7 @@
 
 namespace App\Nova\Metrics\Lotus;
 
+use App\Helpers\Settings\LotusSettings;
 use App\Models\LotusReservation;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Progress;
@@ -18,7 +19,7 @@ class GeneralReservationVolume extends Progress
     {
         return $this->count($request, LotusReservation::class, function ($query) {
             return $query->where('holder_type', 'general');
-        }, target: nova_get_setting('lotus_ticket_general_capacity'));
+        }, target: LotusSettings::generalTicketCapacity());
     }
 
     /**
