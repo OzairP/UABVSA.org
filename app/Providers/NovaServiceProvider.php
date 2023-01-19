@@ -57,7 +57,7 @@ BLADE
             Text::make('Stripe Donation API Id', 'lotus_stripe_donation_price_id')
                 ->help("Can be found in Stripe Product > Price API ID. This product should have the Customer Choose Price model"),
             URL::make('Hospitality Packet URL', 'lotus_hospitality_packet_url')
-                ->help('Must be a fully qualified URL (i.e. start with https://)'),
+                ->help('Must be a fully qualified URL (i.e. start with https://). Can be found at https://uabvsa.org/lotus/hospitality.'),
         ], [], 'Lotus Ticket Settings');
     }
 

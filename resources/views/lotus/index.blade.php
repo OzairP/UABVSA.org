@@ -83,6 +83,11 @@
                 <p class="italic">Please note that if you purchase multiple tickets, your full party MUST be present to check in with you.</p>
 {{--                <p class="pl-3"><strong>Tickets remaining for General Admission</strong>: {{ LotusReservation::remainingGeneralTickets() }}</p>--}}
             </div>
+            <div class="mt-5 space-y-2 px-5 xl:px-0">
+                <p>
+                    The first 150 attendees in line at check-in will receive a free food voucher.
+                </p>
+            </div>
             <div class="mt-5 space-y-1 px-5 xl:px-0">
                 <a href="#" class="flex flex-row align-center underline text-green-100">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline mr-1">
