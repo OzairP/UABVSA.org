@@ -194,17 +194,21 @@ class LotusReservationsController extends Controller
     public function donate ()
     {
         $reservationId = NULL;
+        $successURL = NULL;
 
         if (Session::has('reservation')) {
             $reservation = LotusReservation::find(Session::get('reservation'));
             $reservationId = $reservation->id;
+            $successURL = route('lotus.donate.success', [
+                'reservation' => $reservationId,
+            ]) . '&session_id={CHECKOUT_SESSION_ID}';
+        } else {
+            $successURL = route('lotus.donate.success') . '?session_id={CHECKOUT_SESSION_ID}';
         }
 
         return Checkout::guest()
                        ->create([LotusSettings::stripeDonationPriceId()], [
-                           'success_url' => route('lotus.donate.success', [
-                                   'reservation' => $reservationId,
-                               ]) . '?session_id={CHECKOUT_SESSION_ID}',
+                           'success_url' => $successURL,
                            'cancel_url'  => route('home'),
                        ]);
     }

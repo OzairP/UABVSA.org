@@ -42,7 +42,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         });
 
         Nova::footer(fn($request) => Blade::render(<<<'BLADE'
-            <p class="text-center">uabvsa.org · created by <a class="link-default" href="mailto:ozairpatel2@gmail.com">Ozair Patel</a>.</p>
+            <p class="text-center">uabvsa.org · created by <a class="link-default" href="mailto:ozairpatel2@gmail.com">Ozair Patel</a> · Phone: <a class="link-default" href="tel:+12052232952">205-223-2952</a>.</p>
 BLADE
         ));
 

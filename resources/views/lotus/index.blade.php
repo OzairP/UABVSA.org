@@ -274,6 +274,10 @@
             $ticketsFormGroup.classList.add('hidden')
             $affiliationFormGroup.classList.add('hidden')
         })
+
+        if ($generalRadio.checked) {
+            $generalRadio.dispatchEvent(new Event('change'))
+        }
     </script>
 
 @endsection
