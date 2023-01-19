@@ -74,17 +74,15 @@ class LotusReservation extends Resource
             Number::make('Tickets')
                   ->sortable(),
 
-            Money::make('Charged Price')
-                 ->storedInMinorUnits()
-                 ->sortable(),
+            Boolean::make('Confirmed', 'pending')
+                   ->trueValue(FALSE)
+                   ->falseValue(TRUE)
+                   ->sortable(),
 
-            Money::make('Donation Amount')
-                 ->storedInMinorUnits()
-                 ->sortable(),
+            Heading::make('Info'),
 
             Textarea::make('Affiliation')
-                    ->nullable()
-                    ->hideFromIndex(),
+                    ->nullable(),
 
             Textarea::make('Dietary')
                     ->nullable()
@@ -94,12 +92,15 @@ class LotusReservation extends Resource
                     ->nullable()
                     ->hideFromIndex(),
 
-            Boolean::make('Confirmed', 'pending')
-                   ->trueValue(FALSE)
-                   ->falseValue(TRUE)
-                   ->sortable(),
-
             Heading::make('Stripe'),
+
+            Money::make('Charged Price')
+                 ->storedInMinorUnits()
+                 ->sortable(),
+
+            Money::make('Donation')
+                 ->storedInMinorUnits()
+                 ->sortable(),
 
             Text::make('Stripe Payment ID')
                 ->readonly()
