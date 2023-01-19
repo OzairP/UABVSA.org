@@ -6,6 +6,7 @@ use App\Nova\Actions\Lotus\ConfirmReservation;
 use App\Nova\Actions\Lotus\EmailTickets;
 use Laravel\Nova\Actions\Actionable;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Email;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
@@ -111,6 +112,9 @@ class LotusReservation extends Resource
                 ->readonly()
                 ->hideFromIndex()
                 ->nullable(),
+
+            DateTime::make('Created At')
+                    ->sortable(),
         ];
     }
 
