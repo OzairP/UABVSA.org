@@ -30,22 +30,23 @@ class LotusReserveTicketRequest extends FormRequest
     /**
      * Configure the validator instance.
      *
-     * @param  \Illuminate\Validation\Validator  $validator
+     * @param \Illuminate\Validation\Validator $validator
+     *
      * @return void
      */
     public function withValidator (Validator $validator)
     {
-//        $validator->after(function (Validator $validator) {
-//            if ($this->get('holder_type') === 'student' && $this->get('tickets') > 1) {
-//                $validator->errors()
-//                          ->add('tickets', 'Students may only reserve 1 ticket.');
-//            }
-//        });
+        //        $validator->after(function (Validator $validator) {
+        //            if ($this->get('holder_type') === 'student' && $this->get('tickets') > 1) {
+        //                $validator->errors()
+        //                          ->add('tickets', 'Students may only reserve 1 ticket.');
+        //            }
+        //        });
 
         $validator->after(function (Validator $validator) {
-            if ($this->get('holder_type') === 'student' && !str_ends_with($this->get('email'), '@uab.edu')) {
+            if ($this->isStudent() && (!str_ends_with($this->get('email'), '@uab.edu') || !str_ends_with($this->get('email'), '@uabmc.edu'))) {
                 $validator->errors()
-                          ->add('email', 'Must be a @uab.edu email.');
+                          ->add('email', 'Must be a @uab.edu or @uabmc.edu email.');
             }
         });
 
@@ -89,7 +90,7 @@ class LotusReserveTicketRequest extends FormRequest
     {
         return [
             'holder_type.required' => 'You must select your status.',
-            'tickets.max' => 'You cannot reserve more than 3 tickets.',
+            'tickets.max'          => 'You cannot reserve more than 3 tickets.',
         ];
     }
 
