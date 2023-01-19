@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('charged_price')->default(0);
             $table->boolean('pending')->default(false);
             $table->string('stripe_payment_id')->nullable();
-            $table->integer('donation')->nullable();
+            $table->integer('donation')->default(0)->nullable();
             $table->string('donation_stripe_payment_id')->nullable();
             $table->timestamps();
         });

@@ -44,7 +44,7 @@ class LotusReserveTicketRequest extends FormRequest
         //        });
 
         $validator->after(function (Validator $validator) {
-            if ($this->isStudent() && (!str_ends_with($this->get('email'), '@uab.edu') || !str_ends_with($this->get('email'), '@uabmc.edu'))) {
+            if ($this->isStudent() && !str_ends_with($this->get('email'), '@uab.edu') && !str_ends_with($this->get('email'), '@uabmc.edu')) {
                 $validator->errors()
                           ->add('email', 'Must be a @uab.edu or @uabmc.edu email.');
             }

@@ -190,6 +190,8 @@ class LotusReservation extends Resource
             (new ConfirmReservation)->confirmText('Are you sure you want to confirm this reservation?')
                                     ->confirmButtonText('Confirm')
                                     ->cancelButtonText('Cancel')
+                                    ->showOnIndex()
+                                    ->showOnDetail()
                                     ->canSee(function ($request) {
                                         if ($request instanceof ActionRequest) {
                                             return TRUE;

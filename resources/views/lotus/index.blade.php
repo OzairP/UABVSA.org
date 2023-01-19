@@ -53,7 +53,7 @@
                     </p>
                 </div>
                 <div class="lg:w-1/3 lg:pl-10">
-                    <img src="https://via.placeholder.com/2000x2000" alt="Placeholder">
+                    <img src="{{ url('media/lotus/image_1.jpg') }}" alt="Lotus Under the Lights">
                 </div>
             </div>
         </div>
