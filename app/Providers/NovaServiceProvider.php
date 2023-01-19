@@ -14,6 +14,7 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\URL;
 use Laravel\Nova\Menu\Menu;
 use Laravel\Nova\Menu\MenuItem;
 use Laravel\Nova\Nova;
@@ -55,6 +56,8 @@ BLADE
                 ->help("Can be found in Stripe Product > Price API ID. This product should have the Standard Pricing model"),
             Text::make('Stripe Donation API Id', 'lotus_stripe_donation_price_id')
                 ->help("Can be found in Stripe Product > Price API ID. This product should have the Customer Choose Price model"),
+            URL::make('Hospitality Packet URL', 'lotus_hospitality_packet_url')
+                ->help('Must be a fully qualified URL (i.e. start with https://)'),
         ], [], 'Lotus Ticket Settings');
     }
 

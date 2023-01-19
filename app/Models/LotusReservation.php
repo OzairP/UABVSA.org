@@ -194,7 +194,7 @@ class LotusReservation extends Model
                     ->errorCorrection('H')
                     ->size(250)
                     ->style('round')
-                    ->gradient(54, 105, 85, 48, 94, 76, 'radial')
+                    ->color(5,68,43)
                     ->backgroundColor(238, 238, 238);
 
         if ($transform) {

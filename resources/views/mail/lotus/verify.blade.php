@@ -8,6 +8,6 @@ Once your email has been verified your reservation will be confirmed.
 Complete your Reservation
 </x-mail::button>
 
-Thanks,<br>
-{{ config('app.name') }}
+Best,
+UAB VSA
 </x-mail::message>

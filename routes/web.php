@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\Settings\LotusSettings;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LotusReservationsController;
 use App\Http\Controllers\RedirectionController;
@@ -24,28 +25,33 @@ Route::get('/auth/redirect', [AuthController::class, 'discord_redirect'])
 Route::get('/auth/callback', [AuthController::class, 'discord_callback'])
      ->name('auth.callback');
 
-Route::get('/lotus2023', [LotusReservationsController::class, 'index'])
-     ->name('lotus.index');
+Route::prefix('/lotus')->group(function () {
+    Route::get('/', [LotusReservationsController::class, 'index'])
+         ->name('lotus.index');
 
-Route::post('/lotus2023/reserve', [LotusReservationsController::class, 'reserve'])
-     ->name('lotus.reserve');
+    Route::redirect('/hospitality', LotusSettings::hospitalityPacketUrl())
+        ->name('lotus.hospitality');
 
-Route::get('/lotus2023/reservation/download', [LotusReservationsController::class, 'downloadReservation'])
-     ->name('lotus.reserve.download');
+    Route::post('/reserve', [LotusReservationsController::class, 'reserve'])
+         ->name('lotus.reserve');
 
-Route::get('/lotus2023/verification/complete', [LotusReservationsController::class, 'completeVerification'])
-     ->name('lotus.verification.complete');
+    Route::get('/reservation/download', [LotusReservationsController::class, 'downloadReservation'])
+         ->name('lotus.reserve.download');
 
-Route::get('/lotus2023/payment/success', [LotusReservationsController::class, 'paymentSuccess'])
-     ->name('lotus.payment.success');
+    Route::get('/verification/complete', [LotusReservationsController::class, 'completeVerification'])
+         ->name('lotus.verification.complete');
 
-Route::get('/lotus2023/payment/cancel', [LotusReservationsController::class, 'paymentCancel'])
-     ->name('lotus.payment.cancel');
+    Route::get('/payment/success', [LotusReservationsController::class, 'paymentSuccess'])
+         ->name('lotus.payment.success');
 
-Route::get('/lotus2023/donate', [LotusReservationsController::class, 'donate'])
-     ->name('lotus.donate');
+    Route::get('/payment/cancel', [LotusReservationsController::class, 'paymentCancel'])
+         ->name('lotus.payment.cancel');
 
-Route::get('/lotus2023/donate/success', [LotusReservationsController::class, 'donationSuccess'])
-     ->name('lotus.donate.success');
+    Route::get('/donate', [LotusReservationsController::class, 'donate'])
+         ->name('lotus.donate');
+
+    Route::get('/donate/success', [LotusReservationsController::class, 'donationSuccess'])
+         ->name('lotus.donate.success');
+});
 
 Route::get('/{redirection:slug}', [RedirectionController::class, 'redirect']);

@@ -37,7 +37,7 @@ class SendReservationTicket extends Mailable
     {
         return new Envelope(
             to: $this->reservation->email,
-            subject: 'Your Lotus Under the Lights Ticket' . ($this->reservation->tickets > 1 ? 's' : '')
+            subject: 'UAB VSA Lotus Under the Lights 3 Ticket Confirmation'
         );
     }
 

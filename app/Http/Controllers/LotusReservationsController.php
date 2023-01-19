@@ -66,6 +66,16 @@ class LotusReservationsController extends Controller
      */
     private function reserveForStudent (LotusReservation $reservation)
     {
+        if (LotusSettings::studentValidationModeIsAutomatic()) {
+            return $this->automaticallyVerifyStudent($reservation);
+        }
+
+        Log::info('Held reservation for ' . $reservation->email . ' since validation mode is manual');
+        return view('lotus.reserving.pending');
+    }
+
+    private function automaticallyVerifyStudent(LotusReservation $reservation) {
+        Log::info('Automatically verifying student ' . $reservation->email);
         $signedVerifyURL = URL::temporarySignedRoute('lotus.verification.complete', now()->addMinutes(10), ['reservation' => $reservation->id]);
         Log::info('Sending verification email to ' . $reservation->email . ' with URL ' . $signedVerifyURL);
 
@@ -191,10 +201,10 @@ class LotusReservationsController extends Controller
         }
 
         return Checkout::guest()
-                       ->create(['price_1MJ3XNG3vywsysV9lt9LFxUX'], [
+                       ->create([LotusSettings::stripeDonationPriceId()], [
                            'success_url' => route('lotus.donate.success', [
                                    'reservation' => $reservationId,
-                               ]) . '&session_id={CHECKOUT_SESSION_ID}',
+                               ]) . '?session_id={CHECKOUT_SESSION_ID}',
                            'cancel_url'  => route('home'),
                        ]);
     }
@@ -232,7 +242,7 @@ class LotusReservationsController extends Controller
         $reservation = LotusReservation::findOrFail($request->get('reservation'));
 
         return $reservation->generatePDF()
-                           ->stream('Lotus Reservation (' . $reservation->name . ').pdf');
+                           ->stream('Lotus Reservation for ' . $reservation->name . '.pdf');
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Nova\Actions\Lotus\ConfirmReservation;
+use App\Nova\Actions\Lotus\DownloadTicket;
 use App\Nova\Actions\Lotus\EmailTickets;
 use Laravel\Nova\Actions\Actionable;
 use Laravel\Nova\Fields\Boolean;
@@ -154,6 +155,16 @@ class LotusReservation extends Resource
         return [];
     }
 
+    public function title ()
+    {
+        return "Reservation for " . $this->name;
+    }
+
+    public function subtitle ()
+    {
+        return "Reservation ID: " . $this->id;
+    }
+
     /**
      * Get the actions available for the resource.
      *
@@ -165,9 +176,16 @@ class LotusReservation extends Resource
     {
         return [
             (new EmailTickets)->confirmText('Are you sure you want to send the ticket to the reservation email?')
-                             ->confirmButtonText('Send E-Mail')
-                             ->cancelButtonText('Cancel')
-                             ->onlyOnDetail(),
+                              ->confirmButtonText('Send E-Mail')
+                              ->cancelButtonText('Cancel')
+                              ->onlyOnDetail()
+                              ->canSee(function ($request) {
+                                  if ($request instanceof ActionRequest) {
+                                      return TRUE;
+                                  }
+
+                                  return $this->resource instanceof \App\Models\LotusReservation && $this->resource->isConfirmed();
+                              }),
 
             (new ConfirmReservation)->confirmText('Are you sure you want to confirm this reservation?')
                                     ->confirmButtonText('Confirm')
@@ -180,20 +198,17 @@ class LotusReservation extends Resource
                                         return $this->resource instanceof \App\Models\LotusReservation && $this->resource->isPending();
                                     }),
 
-            (new DownloadExcel)
-                ->onlyOnIndex(),
+            (new DownloadTicket)->withoutConfirmation()
+                                ->canSee(function ($request) {
+                                    if ($request instanceof ActionRequest) {
+                                        return TRUE;
+                                    }
+
+                                    return $this->resource instanceof \App\Models\LotusReservation && $this->resource->isConfirmed();
+                                }),
+
+            (new DownloadExcel)->onlyOnIndex(),
         ];
-    }
-
-    public function title ()
-    {
-        return "Reservation for " . $this->name;
-    }
-
-
-    public function subtitle ()
-    {
-        return "Reservation ID: " . $this->id;
     }
 
 

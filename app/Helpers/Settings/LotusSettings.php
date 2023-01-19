@@ -45,6 +45,9 @@ class LotusSettings
         return nova_get_setting('lotus_stripe_donation_price_id');
     }
 
-
+    public static function hospitalityPacketUrl ()
+    {
+        return nova_get_setting('lotus_hospitality_packet_url');
+    }
 
 }
