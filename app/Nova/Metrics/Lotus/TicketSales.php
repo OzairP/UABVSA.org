@@ -22,7 +22,7 @@ class TicketSales extends Trend
                     ->transform(function ($value) {
                         return $value / 100;
                     })
-                    ->showLatestValue()
+                    ->showSumValue()
                     ->dollars();
     }
 
