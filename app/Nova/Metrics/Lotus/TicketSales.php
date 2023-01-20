@@ -18,7 +18,7 @@ class TicketSales extends Trend
      */
     public function calculate (NovaRequest $request)
     {
-        return $this->sumByDays($request, LotusReservation::class, 'charged_price')
+        return $this->sumByMinutes($request, LotusReservation::class, 'charged_price')
                     ->transform(function ($value) {
                         return $value / 100;
                     })
@@ -33,10 +33,11 @@ class TicketSales extends Trend
     public function ranges ()
     {
         return [
-            3  => __('3 Days'),
-            7  => __('7 Days'),
-            14 => __('14 Days'),
-            31 => __('31 Days'),
+            15 => __('15 Minutes'),
+            30 => __('30 Minutes'),
+            60 => __('1 Hour'),
+            120 => __('2 Hours'),
+            240 => __('4 Hours'),
         ];
     }
 

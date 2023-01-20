@@ -23,9 +23,9 @@ class LotusDashboard extends Dashboard
             new TicketReservations(),
             new ReservationsByHolder(),
             new TicketSales(),
+            new TotalReservedVolume(),
             new StudentReservationVolume(),
             new GeneralReservationVolume(),
-            new TotalReservedVolume(),
         ];
     }
 

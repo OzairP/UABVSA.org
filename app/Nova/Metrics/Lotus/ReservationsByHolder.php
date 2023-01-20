@@ -18,7 +18,7 @@ class ReservationsByHolder extends Partition
      */
     public function calculate (NovaRequest $request)
     {
-        return $this->count($request, LotusReservation::class, 'holder_type')
+        return $this->sum($request, LotusReservation::class, 'tickets', 'holder_type')
                     ->label(function ($value) {
                         return ucfirst($value);
                     });
