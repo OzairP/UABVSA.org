@@ -66,6 +66,7 @@ class LotusReservation extends Resource
                   ->options([
                       'student' => 'Student',
                       'general' => 'General Admission',
+                      'sponsor' => 'Sponsor',
                   ])
                   ->sortable(),
 
