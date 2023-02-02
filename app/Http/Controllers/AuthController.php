@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Helpers\DiscordClient;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Log;
 
 class AuthController extends Controller
 {
@@ -32,6 +33,11 @@ class AuthController extends Controller
         $client = new DiscordClient($discord_user->token);
 
         $membership = $client->getUserGuildInfo(config('discord.guild_id'));
+
+        Log::log(sprintf("Attempt to login with discord user: %s (%s)", $discord_user->id, $discord_user->name), [
+            'discord_user' => $discord_user,
+            'membership'   => $membership,
+        ]);
 
         $user = User::updateOrCreate([
             'discord_id' => $discord_user->getId(),
