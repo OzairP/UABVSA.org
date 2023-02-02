@@ -34,7 +34,7 @@ class AuthController extends Controller
 
         $membership = $client->getUserGuildInfo(config('discord.guild_id'));
 
-        Log::log(sprintf("Attempt to login with discord user: %s (%s)", $discord_user->id, $discord_user->name), [
+        Log::info(sprintf("Attempt to login with discord user: %s (%s)", $discord_user->id, $discord_user->name), [
             'discord_user' => $discord_user,
             'membership'   => $membership,
         ]);
