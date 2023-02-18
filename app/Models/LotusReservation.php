@@ -4,14 +4,15 @@ namespace App\Models;
 
 use App\Helpers\Settings\LotusSettings;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /**
  * App\Models\LotusReservation
- *
  * @property int                             $id
  * @property string                          $holder_type
  * @property string                          $name
@@ -46,7 +47,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
  * @method static Builder|LotusReservation whereDonationStripePaymentId($value)
  * @property string|null                     $affiliation
  * @method static Builder|LotusReservation whereAffiliation($value)
- * @property string|null $checked_in_at
+ * @property string|null                     $checked_in_at
  * @method static Builder|LotusReservation whereCheckedInAt($value)
  */
 class LotusReservation extends Model
@@ -65,7 +66,6 @@ class LotusReservation extends Model
         'charged_price',
         'pending',
         'stripe_payment_id',
-        'checked_in_at',
     ];
 
     public static function acceptingNewReservations ()
@@ -125,7 +125,7 @@ class LotusReservation extends Model
     public static function remainingGeneralTickets ()
     {
         return LotusSettings::generalTicketCapacity() - static::where('holder_type', 'general')
-                                                                         ->sum('tickets');
+                                                              ->sum('tickets');
     }
 
     public static function createPendingReservation (array $data): LotusReservation
@@ -139,6 +139,24 @@ class LotusReservation extends Model
     {
         return static::where('email', $email)
                      ->first();
+    }
+
+    public function getCheckInTimeForTicket (int $ticketNumber): ?Carbon
+    {
+        $checkInTime = $this->tickets_checked_in_at[$ticketNumber];
+
+        if (!$checkInTime) {
+            return NULL;
+        }
+
+        return Carbon::parse($checkInTime);
+    }
+
+    public function checkInTicket (int $ticketNumber)
+    {
+        $this->ticket_check_ins = collect($this->tickets_checked_in_at)
+            ->put($ticketNumber, Carbon::now())
+            ->toJson();
     }
 
     public function isConfirmed (): bool
@@ -172,6 +190,11 @@ class LotusReservation extends Model
         return $this->holder_type === 'student';
     }
 
+    public function subTotal ()
+    {
+        return $this->chargedPrice() + $this->donationAmount();
+    }
+
     public function chargedPrice ()
     {
         return $this->charged_price !== 0 ? $this->charged_price / 100 : 0;
@@ -180,10 +203,6 @@ class LotusReservation extends Model
     public function donationAmount ()
     {
         return $this->donation ? $this->donation / 100 : 0;
-    }
-
-    public function subTotal () {
-        return $this->chargedPrice() + $this->donationAmount();
     }
 
     /**
@@ -230,5 +249,12 @@ class LotusReservation extends Model
             default:
                 return 'Unknown';
         }
+    }
+
+    protected function ticketsCheckedInAt (): Attribute
+    {
+        return Attribute::make(
+            get: static fn(mixed $value, array $attributes) => $attributes['ticket_check_ins'] === NULL ? array_fill(0, $attributes['tickets'], NULL) : json_decode($attributes['ticket_check_ins'], FALSE, 512, JSON_THROW_ON_ERROR),
+        );
     }
 }

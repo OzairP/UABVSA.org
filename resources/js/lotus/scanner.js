@@ -10,8 +10,6 @@ const qrScanner = new QrScanner($video, res => readScanResult(res.data), {
     highlightScanRegion: true,
 })
 
-console.log(qrScanner)
-
 qrScanner.start()
          .catch(err => {
              if (err.message === 'Scanner error: No QR code found') return
@@ -38,17 +36,14 @@ async function readScanResult (result) {
     $overlayShadow.classList.remove('opacity-0')
     $overlayShadow.classList.add('opacity-80')
 
-    console.log(result)
-
     const reservationId = Number.parseInt(result.at(16))
     const ticketNumber = Number.parseInt(result.at(18))
 
-    console.log(reservationId, ticketNumber)
     let reservation = null
 
     // do a loading state here
     try {
-        const res = await fetch(`/api/lotus/reservation/${reservationId}`)
+        const res = await fetch(`/api/lotus/reservation/${reservationId}/${ticketNumber}`)
         reservation = await res.json()
 
         if (!reservation) throw new Error('Reservation not found')
@@ -118,7 +113,7 @@ function loadReservationData (reservation, ticketNumber) {
         onCheckInClickHandler = () => {
             $overlayCheckIn.classList.add('opacity-50')
 
-            checkIn(reservation.id)
+            checkIn(reservation.id, ticketNumber)
                 .then((data) => {
                     $overlayCheckIn.classList.remove('opacity-50')
                     loadReservationData(data, ticketNumber)
@@ -130,8 +125,8 @@ function loadReservationData (reservation, ticketNumber) {
     }
 }
 
-async function checkIn (reservationId) {
-    const res = await fetch(`/api/lotus/reservation/${reservationId}/check-in`, {
+async function checkIn (reservationId, ticketNumber) {
+    const res = await fetch(`/api/lotus/reservation/${reservationId}/${ticketNumber}/check-in`, {
         method: 'POST',
     })
     return await res.json()

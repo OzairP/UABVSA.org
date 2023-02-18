@@ -19,9 +19,9 @@ Route::group([
     'prefix' => 'lotus/reservation',
     'middleware' => 'auth.lotus',
 ], static function () {
-    Route::get('/{lotusReservation}', [LotusApiController::class, 'show'])
+    Route::get('/{lotusReservation}/{ticketNumber}', [LotusApiController::class, 'show'])
          ->name('api.lotus.show');
 
-    Route::post('/{lotusReservation}/check-in', [LotusApiController::class, 'checkIn'])
+    Route::post('/{lotusReservation}/{ticketNumber}/check-in', [LotusApiController::class, 'checkIn'])
          ->name('api.lotus.check-in');
 });

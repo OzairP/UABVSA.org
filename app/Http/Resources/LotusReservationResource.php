@@ -16,6 +16,7 @@ class LotusReservationResource extends JsonResource
      */
     public function toArray ($request): array
     {
+        $checkedInAt = $this->tickets_checked_in_at[$this->additional['ticket_number']];
         return [
             "id"                => $this->id,
             "holder_type"       => $this->holderTypeFormatted(),
@@ -27,9 +28,9 @@ class LotusReservationResource extends JsonResource
             "affiliation"       => $this->affiliation ?? 'None',
             "confirmed"         => !$this->pending,
             "donation"          => $this->donation ?? 0,
-            "checked_in_at"     => $this->checked_in_at,
+            "checked_in_at"     => $checkedInAt,
             "pending"           => $this->pending,
-            "check_in_eligible" => $this->checked_in_at === NULL && $this->pending !== FALSE,
+            "check_in_eligible" => $checkedInAt === NULL && $this->pending !== FALSE,
         ];
     }
 }
