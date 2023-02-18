@@ -36,10 +36,9 @@
 
     @yield('styles')
 </head>
-<body>
-<div id="app">
+<body class="@stack('body-styles')">
 
-    @yield('content')
+@yield('content')
 
 @production
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -54,5 +53,6 @@
         gtag('config', 'G-NDHGHE3W0M')
     </script>
 @endproduction
+@stack('scripts')
 </body>
 </html>

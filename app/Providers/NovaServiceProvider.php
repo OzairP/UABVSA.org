@@ -58,6 +58,8 @@ BLADE
                 ->help("Can be found in Stripe Product > Price API ID. This product should have the Customer Choose Price model"),
             URL::make('Hospitality Packet URL', 'lotus_hospitality_packet_url')
                 ->help('Must be a fully qualified URL (i.e. start with https://). Can be found at https://uabvsa.org/lotus/hospitality.'),
+            Text::make('Lotus Scanner Passkey', 'lotus_scanner_passkey')
+                ->help('Passkey to the <a href="/lotus/scanner" target="_blank">Lotus Scanner</a>. This passkey is used for the username AND password when accessing the scanner.'),
         ], [], 'Lotus Ticket Settings');
     }
 

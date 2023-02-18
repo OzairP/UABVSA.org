@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "count-it-down": "^1.0.0",
+        "qr-scanner": "^1.4.2",
         "sparticles": "^1.3.1"
     }
 }

@@ -11,6 +11,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /**
  * App\Models\LotusReservation
+ *
  * @property int                             $id
  * @property string                          $holder_type
  * @property string                          $name
@@ -45,6 +46,8 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
  * @method static Builder|LotusReservation whereDonationStripePaymentId($value)
  * @property string|null                     $affiliation
  * @method static Builder|LotusReservation whereAffiliation($value)
+ * @property string|null $checked_in_at
+ * @method static Builder|LotusReservation whereCheckedInAt($value)
  */
 class LotusReservation extends Model
 {
@@ -62,6 +65,7 @@ class LotusReservation extends Model
         'charged_price',
         'pending',
         'stripe_payment_id',
+        'checked_in_at',
     ];
 
     public static function acceptingNewReservations ()

@@ -52,6 +52,10 @@ Route::prefix('/lotus')->group(function () {
 
     Route::get('/donate/success', [LotusReservationsController::class, 'donationSuccess'])
          ->name('lotus.donate.success');
+
+    Route::view('/scanner', 'lotus.scanner')
+         ->middleware('auth.lotus')
+         ->name('lotus.scanner');
 });
 
 Route::get('/{redirection:slug}', [RedirectionController::class, 'redirect']);
